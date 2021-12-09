@@ -8,3 +8,5 @@ my cs notes
 ## CS 144 : Introduction to Computer Networking
 
 ## Tools
+
+[轻量、快速的zsh](/tools/zsh-config.md)
