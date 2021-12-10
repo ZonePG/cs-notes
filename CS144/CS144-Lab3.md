@@ -2,15 +2,15 @@
 
 ![tcp-socket](./images/tcp-socket.png)
 
-Lab 3 任务是实现 TCP 中的发送方，也就是 **TCPSender**，它负责将 **ByteStream**（来自上层发送方应用）封装成 TCP Segments 发送给 TCPReceiver。 
+Lab 3 任务是实现 TCP 中的发送方，也就是 **TCPSender**，它负责将 **ByteStream**（来自上层发送方应用）封装成 **TCP Segments** 发送给 **TCPReceiver**。 
 
 这样 TCPReceiver 接收这些 TCP Segments 并还原成原始的 ByteStream，并发送 acknowledgments（确认号） 和 window advertisements（通告窗口）给 TCPSender。
 
-TCPSender 发送 **TCPSegment** 时，写时涉及的字段包括与 TCPReceiver 相关的所有字段：the sequence number, the SYN flag, the payload, the FIN flag。
+TCPSender 发送 TCPSegment 时，写时涉及的字段包括与 TCPReceiver 相关的所有字段：the sequence number, the SYN flag, the payload, the FIN flag。
 
-TCPSender 接收 **TCPSegment** 时，读时涉及的字段包括：the ackno, the window size。
+TCPSender 接收 TCPSegment 时，读时涉及的字段包括：the ackno, the window size。
 
-下图是 TCPSender 操作 **TCPSegment** 涉及的字段，蓝色部分是写时字段、红色部分是读时字段。
+下图是 TCPSender 操作 TCPSegment 涉及的字段，蓝色部分是写时字段、红色部分是读时字段。
 
 ![tcp-socket](./images/tcp-segment-sender.png)
 
