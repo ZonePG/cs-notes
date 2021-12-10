@@ -2,9 +2,9 @@
 
 ![tcp-socket](./images/tcp-socket.png)
 
-Lab 3 任务是实现 TCP 中的发送方，也就是 **TCPSender**，它负责将 **ByteStream**（来自上层发送方应用）封装成 **TCP Segments** 发送给 **TCPReceiver**。 
+Lab 3 任务是实现 TCP 中的发送方，也就是 **TCPSender**，它负责将 **ByteStream**（来自上层发送方应用）封装成 **TCPSegment** 序列发送给 **TCPReceiver**。 
 
-这样 TCPReceiver 接收这些 TCP Segments 并还原成原始的 ByteStream，并发送 acknowledgments（确认号） 和 window advertisements（通告窗口）给 TCPSender。
+这样 TCPReceiver 接收这些 TCPSegment 序列并还原成原始的 ByteStream，并发送 acknowledgments（确认） 和 window advertisements（通告窗口）给 TCPSender。
 
 TCPSender 发送 TCPSegment 时，写时涉及的字段包括与 TCPReceiver 相关的所有字段：the sequence number, the SYN flag, the payload, the FIN flag。
 
@@ -22,15 +22,15 @@ TCPSender 接收 TCPSegment 时，读时涉及的字段包括：the ackno, the w
 
 3. 追踪发送给了接收方，但是还没有被确认的 segments，这些 segments 被称作 **outstanding segments**。
 
-4. 如果 **outstanding segments** 超过一定时间还没被确认，那就重新将它发送给接收方。
+4. 如果 outstanding segments 超过一定时间还没被确认，那就重新将它发送给接收方。
 
 ## 如何实现丢失/超时重传？
 
 上述 1 和 2 很好理解，下面是讲解 3 和 4 的细节，来实现 TCPSender 超时重传。
 
-1. 当初始化 TCPSender 时，会初始化 retransmission timeout (RTO, 重传超时时间) 为 _initial_retransmission_timeout。
+1. 当初始化 TCPSender 时，会初始化 **retransmission timeout** (RTO, 重传超时时间) 为 **_initial_retransmission_timeout**。
 
-2. 当 TCPSender 发送 segment 时，会启动一个 retransmission timer (重传计时器)。
+2. 当 TCPSender 发送 segment 时，会启动一个 **retransmission timer** (重传计时器)。
 
 3. 重传计时器时间超过了 RTO：
     1. 重发 outstanding segments 中最早的一个 segment
@@ -71,7 +71,7 @@ class RetransmissionTimer {
 
 ### void fill_window()
 
-TCPSender 尽可能地填充接收方窗口，读取 ByteStream 封装成 TCPSegment 发送给接收方，超过TCPConfig::MAX_PAYLOAD_SIZE`大小时要分多次发送。
+TCPSender 尽可能地填充接收方窗口，读取 ByteStream 封装成 TCPSegment 发送给接收方，超过`TCPConfig::MAX_PAYLOAD_SIZE`大小时要分多次发送。
 
 需要注意的是当接收方窗口大小为0时，fill_window() 函数将窗口大小视为 1。关于解释，可以引用 lab 指导的原文：
 
