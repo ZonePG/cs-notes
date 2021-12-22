@@ -7,6 +7,8 @@ my cs notes
 
 ## CS 144 : Introduction to Computer Networking
 
+[Lab Checkpoint 0: networking warmup](/CS144/CS144-Lab0.md)
+
 [Lab Checkpoint 3: the TCP sender](/CS144/CS144-Lab3.md)
 
 ## Tools
