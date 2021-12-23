@@ -11,6 +11,8 @@ my cs notes
 
 [Lab Checkpoint 1: stitching substrings into a byte stream](/CS144/CS144-Lab1.md)
 
+[Lab Checkpoint 2: the TCP receiver](/CS144/CS144-Lab2.md)
+
 [Lab Checkpoint 3: the TCP sender](/CS144/CS144-Lab3.md)
 
 ## Tools
