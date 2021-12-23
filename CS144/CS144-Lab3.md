@@ -2,7 +2,7 @@
 
 ![tcp-socket](./images/tcp-socket.png)
 
-Lab 3 任务是实现 TCP 中的发送方，也就是 **TCPSender**，它负责将 **ByteStream**（来自上层发送方应用）封装成 **TCPSegment** 序列发送给 **TCPReceiver**。 
+Lab 3 实现 **TCPSender**，它负责将 **ByteStream** 封装成 **TCPSegment** 发送给对等端。 
 
 这样 TCPReceiver 接收这些 TCPSegment 序列并还原成原始的 ByteStream，并发送 acknowledgments（确认） 和 window advertisements（通告窗口）给 TCPSender。
 
@@ -16,7 +16,7 @@ TCPSender 接收 TCPSegment 时，读时涉及的字段包括：the ackno, the w
 
 总结 TCPSender 的任务就是：
 
-1. 追踪接收方窗口，处理接收方发送过来的**确认号**和**窗口大小**。
+1. 追踪**另一端的接收方**窗口，处理接收方发送过来的**确认号**和**窗口大小**。
 
 2. 尽可能填充窗口，读 ByteStream，封装成 TCPSegment（可能包括 SYN 和 FIN ），发送给接收方。
 
@@ -193,4 +193,4 @@ Lab3 指导的原文如下：
 
 > The basic principle is to send whatever the receiver will allow us to send (filling the window), and keep retransmitting until the receiver acknowledges each segment. This is called “automatic repeat request” (ARQ). The sender divides the byte stream up into segments and sends them, as much as the receiver’s window allows. Thanks to your work last week, we know that the remote TCP receiver can reconstruct the byte stream as long as it receives each index-tagged byte at least once—no matter the order. The sender’s job is to make sure the receiver gets each byte at least once.
 
-接收方没有在 RTO 时间内确认 TCPSegment，发送方就需要重新发送，发送方的任务是确保接收方对于每个字节数据都至少保证接收过一次。
+对等端没有在 RTO 时间内确认 TCPSegment，TCPSender 就需要重新发送，TCPSender 的任务是确保接收方对于每个字节数据都至少保证接收过一次。
