@@ -12,7 +12,7 @@ TCPSender 接收 TCPSegment 时，读时涉及的字段包括：the ackno, the w
 
 下图是 TCPSender 操作 TCPSegment 涉及的字段，蓝色部分是写时字段、红色部分是读时字段。
 
-![tcp-socket](./images/tcp-segment-sender.png)
+![tcp-socket](./images/tcp-segment.png)
 
 总结 TCPSender 的任务就是：
 
