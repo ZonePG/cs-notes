@@ -9,6 +9,8 @@ my cs notes
 
 [Lab Checkpoint 0: networking warmup](/CS144/CS144-Lab0.md)
 
+[Lab Checkpoint 1: stitching substrings into a byte stream](/CS144/CS144-Lab1.md)
+
 [Lab Checkpoint 3: the TCP sender](/CS144/CS144-Lab3.md)
 
 ## Tools
