@@ -15,6 +15,8 @@ my cs notes
 
 [Lab Checkpoint 3: the TCP sender](/CS144/CS144-Lab3.md)
 
+[Lab Checkpoint 4: the TCP connection](/CS144/CS144-Lab4.md)
+
 ## Tools
 
 [轻量、快速的zsh](/tools/zsh-config.md)
