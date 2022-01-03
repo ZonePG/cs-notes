@@ -236,7 +236,7 @@ TCPConnection 实现完毕。
 
 ![tcp-connection-test-server-zeroprobe](./images/tcp-connection-test-server-zeroprobe.png)
 
-![tcp-connection-test-wireshark-zeroprobe](./images/tcp-connection-test-wireshark.png)
+![tcp-connection-test-wireshark-zeroprobe](./images/tcp-connection-test-wireshark-zeroprobe.png)
 
 ![tcp-connection-test-client-zeroprobe](./images/tcp-connection-test-client-zeroprobe.png)
 
