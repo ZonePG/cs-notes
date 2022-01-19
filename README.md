@@ -24,6 +24,8 @@ my cs notes
 [Lab Checkpoint 4: the TCP connection](/CS144/CS144-Lab4.md)
 
 [Lab Checkpoint 5: the network interface](/CS144/CS144-Lab5.md)
+
+[Lab Checkpoint 6: building an IP router](/CS144/CS144-Lab6.md)
 ## Tools
 
 [轻量、快速的zsh](/tools/zsh-config.md)
