@@ -1,6 +1,8 @@
-# Lab 1: IntelliJ, Java, git
+# CS61B Lab
 
 我选择了 2021 春季版本的 CS61B，课程主页是 [https://sp21.datastructur.es/](https://sp21.datastructur.es/)。Calendar 有对应的学习材料以及链接。gradescope 的邀请码是 `P5WVGW`
+
+## Lab 1
 
 Lab1 十分简单，就是简单熟悉一下搭建 Java 开发环境，材料 [https://sp21.datastructur.es/materials/lab/lab1/lab1](https://sp21.datastructur.es/materials/lab/lab1/lab1) 介绍十分详细。
 
@@ -16,3 +18,9 @@ public static int nextNumber(int n) {
 ```
 
 提交到远程仓库再在 gradescope 选择自己仓库即可，这一部分实验十分简单，主要熟悉一下环境搭建以及评分过程。
+
+## Lab 2
+
+Lab2 是学会使用`IntelliJ debugger`和`JUnit tests`。
+
+主要掌握：断点、Step Into、Step Over、Step Out、条件断点和单元测试。

@@ -3,9 +3,9 @@ my cs notes
 
 ## CMU 15-213 : Introduction to Computer Systems ( CSAPP )
 
-## CMU 15-445 : Data Structures
+## CS 61B : Data Structures
 
-[Lab 1: IntelliJ, Java, git](/CS61B/CS61B-Lab1.md)
+[CS61B Lab](/CS61B/CS61B-Lab.md)
 
 [Project 0: 2048](/CS61B/CS61B-Project0.md)
 
