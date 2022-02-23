@@ -3,6 +3,10 @@ my cs notes
 
 ## CMU 15-213 : Introduction to Computer Systems ( CSAPP )
 
+## CS 61A : Structure and Interpretation of Computer Programs
+
+[CS61A course repository](https://github.com/ZonePG/CS61A)
+
 ## CS 61B : Data Structures
 
 [CS61B Lab](/CS61B/CS61B-Lab.md)
