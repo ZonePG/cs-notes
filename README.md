@@ -7,6 +7,8 @@ my cs notes
 
 [CS61A course repository](https://github.com/ZonePG/CS61A)
 
+[Scheme 解释器中尾递归优化的实现](/CS61A/CS61A-tail-recursion.md)
+
 ## CS 61B : Data Structures
 
 [CS61B Lab](/CS61B/CS61B-Lab.md)
