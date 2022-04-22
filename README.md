@@ -11,9 +11,7 @@ my cs notes
 
 ## CS 61B : Data Structures
 
-[CS61B Lab](/CS61B/CS61B-Lab.md)
-
-[Project 0: 2048](/CS61B/CS61B-Project0.md)
+[CS61B course repository](https://github.com/ZonePG/CS61B)
 
 ## CMU 15-445 : Intro to Database Systems
 
