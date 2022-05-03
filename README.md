@@ -15,6 +15,7 @@ my cs notes
 
 ## CS 61C: Great Ideas in Computer Architecture (Machine Structures)
 
+[CS61C course repository](https://github.com/ZonePG/CS61C)
 ## CMU 15-445 : Intro to Database Systems
 
 ## CS 144 : Introduction to Computer Networking
