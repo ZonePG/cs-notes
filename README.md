@@ -35,6 +35,10 @@ my cs notes
 [Lab Checkpoint 6: building an IP router](/CS144/CS144-Lab6.md)
 
 [Lab Checkpoint 7: putting it all together](/CS144/CS144-Lab7.md)
+
+##  MIT6.S081: Operating System Engineering
+
+[MIT6.S081 course repository](https://github.com/ZonePG/MIT6.S081)
 ## Tools
 
 [轻量、快速的zsh](/tools/zsh-config.md)
