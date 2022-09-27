@@ -51,6 +51,8 @@ my cs notes
 
 - [排序](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/1-sort-algorithm.md)
 
+- [二分](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/2-binary.md)
+
 ## Tools
 
 [轻量、快速的zsh](/tools/zsh-config.md)
