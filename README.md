@@ -44,6 +44,13 @@ my cs notes
 ##  MIT6.S081: Operating System Engineering
 
 [MIT6.S081 course repository](https://github.com/ZonePG/MIT6.S081)
+
+## AcWing 算法基础课
+
+[基础算法](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/)
+
+- [排序](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/1-sort-algorithm.md)
+
 ## Tools
 
 [轻量、快速的zsh](/tools/zsh-config.md)
