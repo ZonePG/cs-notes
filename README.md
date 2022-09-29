@@ -48,10 +48,9 @@ my cs notes
 ## AcWing 算法基础课
 
 [基础算法](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/)
-
 - [排序](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/1-sort-algorithm.md)
-
 - [二分](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/2-binary.md)
+- [高精度](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/3-high-precision.md)
 
 ## Tools
 
