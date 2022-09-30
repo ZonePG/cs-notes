@@ -51,6 +51,7 @@ my cs notes
 - [排序](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/1-sort-algorithm.md)
 - [二分](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/2-binary.md)
 - [高精度](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/3-high-precision.md)
+- [前缀和与差分](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/4-prefix-sum-and-difference.md)
 
 ## Tools
 
