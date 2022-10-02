@@ -52,6 +52,10 @@ my cs notes
 - [二分](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/2-binary.md)
 - [高精度](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/3-high-precision.md)
 - [前缀和与差分](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/4-prefix-sum-and-difference.md)
+- [双指针算法](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/5-two-pointers.md)
+- [位运算](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/6-bit-operator.md)
+- [离散化](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/7-discretization.md)
+- [区间合并](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/8-interval-merge.md)
 
 ## Tools
 
