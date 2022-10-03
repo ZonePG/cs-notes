@@ -57,6 +57,13 @@ my cs notes
 - [离散化](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/7-discretization.md)
 - [区间合并](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/8-interval-merge.md)
 
+[数据结构](/AcWing-Algorithm-Basic-Course/2-Data-Structure/5-kmp.md)
+- [单链表](/AcWing-Algorithm-Basic-Course/2-Data-Structure/1-linkedlist.md)
+- [双链表](/AcWing-Algorithm-Basic-Course/2-Data-Structure/2-doubly-linkedlist.md)
+- [栈、单调栈](/AcWing-Algorithm-Basic-Course/2-Data-Structure/3-stack.md)
+- [队列、单调队列](/AcWing-Algorithm-Basic-Course/2-Data-Structure/4-queue.md)
+- [KMP](/AcWing-Algorithm-Basic-Course/2-Data-Structure/5-kmp.md)
+
 ## Tools
 
 [轻量、快速的zsh](/tools/zsh-config.md)
