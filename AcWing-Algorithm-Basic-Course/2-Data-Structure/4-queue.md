@@ -50,7 +50,7 @@ if (hh != tt)
 ## 单调队列
 
 **模板题**
-- [AcWing 154. 滑动窗口](https://www.acwing.com/blog/content/404/)
+- [AcWing 154. 滑动窗口](https://www.acwing.com/problem/content/156/)
 ```c++
 常见模型：找出滑动窗口中的最大值/最小值
 int hh = 0, tt = -1;

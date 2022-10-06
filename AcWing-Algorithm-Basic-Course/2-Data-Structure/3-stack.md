@@ -2,6 +2,7 @@
 
 **模板题**
 - [AcWing 828. 模拟栈](https://www.acwing.com/problem/content/830/)
+- [AcWing 3302. 表达式求值](https://www.acwing.com/problem/content/3305/)
 ```c++
 // tt表示栈顶
 int stk[N], tt = 0;
