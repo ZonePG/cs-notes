@@ -63,6 +63,9 @@ my cs notes
 - [栈、单调栈](/AcWing-Algorithm-Basic-Course/2-Data-Structure/3-stack.md)
 - [队列、单调队列](/AcWing-Algorithm-Basic-Course/2-Data-Structure/4-queue.md)
 - [KMP](/AcWing-Algorithm-Basic-Course/2-Data-Structure/5-kmp.md)
+- [Trie](/AcWing-Algorithm-Basic-Course/2-Data-Structure/6-trie.md)
+- [并查集](/AcWing-Algorithm-Basic-Course/2-Data-Structure/7-disjoint-set.md)
+- [堆](/AcWing-Algorithm-Basic-Course/2-Data-Structure/8-heap.md)
 
 ## Tools
 
