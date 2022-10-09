@@ -66,6 +66,8 @@ my cs notes
 - [Trie](/AcWing-Algorithm-Basic-Course/2-Data-Structure/6-trie.md)
 - [并查集](/AcWing-Algorithm-Basic-Course/2-Data-Structure/7-disjoint-set.md)
 - [堆](/AcWing-Algorithm-Basic-Course/2-Data-Structure/8-heap.md)
+- [哈希表](/AcWing-Algorithm-Basic-Course/2-Data-Structure/9-hashmap.md)
+- [C++ STL](/AcWing-Algorithm-Basic-Course/2-Data-Structure/10-stl.md)
 
 ## Tools
 

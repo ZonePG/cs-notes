@@ -1,7 +1,7 @@
 # KMP
 
 **模板题**
-- [AcWing 831. KMP字符串](https://www.acwing.com/blog/content/404/)
+- [AcWing 831. KMP字符串](https://www.acwing.com/problem/content/833/)
 ```c++
 // s[]是长文本，p[]是模式串，n是s的长度，m是p的长度
 求模式串的Next数组：
