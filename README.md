@@ -69,6 +69,10 @@ my cs notes
 - [哈希表](/AcWing-Algorithm-Basic-Course/2-Data-Structure/9-hashmap.md)
 - [C++ STL](/AcWing-Algorithm-Basic-Course/2-Data-Structure/10-stl.md)
 
+## Web Development for Beginners - A Curriculum
+
+[course repository](https://github.com/ZonePG/Web-Dev-For-Beginners)
+
 ## Tools
 
 [轻量、快速的zsh](/tools/zsh-config.md)
