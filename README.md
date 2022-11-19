@@ -41,9 +41,12 @@ my cs notes
 
 [Lab Checkpoint 7: putting it all together](/CS144/CS144-Lab7.md)
 
-##  MIT6.S081: Operating System Engineering
+##  MIT 6.S081: Operating System Engineering
 
 [MIT6.S081 course repository](https://github.com/ZonePG/MIT6.S081)
+
+## CMU 11-777: MultiModal Machine Learning
+[Introduction: Research and technical challenges](/11-777MMML/1-introduction.md)
 
 ## AcWing 算法基础课
 
