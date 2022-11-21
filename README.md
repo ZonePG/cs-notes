@@ -51,6 +51,8 @@ my cs notes
 
 [Multimodal Research Tasks](/11-777MMML/2-multimodal-research-tasks.md)
 
+[Basic Concepts: Neural Network](/11-777MMML/3-basic-concepts-neural-networks.md)
+
 ## AcWing 算法基础课
 
 [基础算法](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/)
