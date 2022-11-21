@@ -46,7 +46,10 @@ my cs notes
 [MIT6.S081 course repository](https://github.com/ZonePG/MIT6.S081)
 
 ## CMU 11-777: MultiModal Machine Learning
+
 [Introduction: Research and technical challenges](/11-777MMML/1-introduction.md)
+
+[Multimodal Research Tasks](/11-777MMML/2-multimodal-research-tasks.md)
 
 ## AcWing 算法基础课
 
