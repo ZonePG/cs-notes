@@ -57,6 +57,8 @@ my cs notes
 
 [Visual unimodal representations](/11-777MMML/5-visual-unimodal-representations.md)
 
+[Language Representations and RNNs](/11-777MMML/6-language-unimodal-representations.md)
+
 ## AcWing 算法基础课
 
 [基础算法](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/)
