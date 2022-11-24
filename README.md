@@ -55,6 +55,8 @@ my cs notes
 
 [Basic Concepts: Network Optimization](/11-777MMML/4-basic-concepts-network-optimazation.md)
 
+[Visual unimodal representations](/11-777MMML/5-visual-unimodal-representations.md)
+
 ## AcWing 算法基础课
 
 [基础算法](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/)
