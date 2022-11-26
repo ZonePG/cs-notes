@@ -49,15 +49,9 @@ my cs notes
 
 [Introduction](/MML-Tutorial/1-introduction.md)
 
-[Multimodal Research Tasks](/11-777MMML/2-multimodal-research-tasks.md)
+[Challenge 1: Representation](/MML-Tutorial/2-representation.md)
 
-[Basic Concepts: Neural Network](/11-777MMML/3-basic-concepts-neural-networks.md)
-
-[Basic Concepts: Network Optimization](/11-777MMML/4-basic-concepts-network-optimazation.md)
-
-[Visual unimodal representations](/11-777MMML/5-visual-unimodal-representations.md)
-
-[Language Representations and RNNs](/11-777MMML/6-language-unimodal-representations.md)
+[Challenge 2: Alignment](/MML-Tutorial/3-alignment.md)
 
 ## AcWing 算法基础课
 
