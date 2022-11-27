@@ -96,7 +96,7 @@ Most modalities have internal structure with multiple elements
 
 ### Challenge 3: Reasoning
 
-Definition: Combining knowledge, usually through multiple inferential steps, exploiting multimodal alignment and problem structure
+**Definition**: Combining knowledge, usually through multiple inferential steps, exploiting multimodal alignment and problem structure
 
 ![1-08](/MML-Tutorial/images/1-08.png)
 
