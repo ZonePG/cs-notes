@@ -53,6 +53,10 @@ my cs notes
 
 [Challenge 2: Alignment](/MML-Tutorial/3-alignment.md)
 
+[Challenge 3: Reasoning](/MML-Tutorial/4-reasoning.md)
+
+[Challenge 4: Generation](/MML-Tutorial/5-generation.md)
+
 ## AcWing 算法基础课
 
 [基础算法](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/)
