@@ -57,6 +57,10 @@ my cs notes
 
 [Challenge 4: Generation](/MML-Tutorial/5-generation.md)
 
+[Challenge 5: Transference](/MML-Tutorial/6-transference.md)
+
+[Challenge 6: Quantification](/MML-Tutorial/7-quantification.md)
+
 ## AcWing 算法基础课
 
 [基础算法](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/)
