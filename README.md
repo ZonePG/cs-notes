@@ -89,6 +89,15 @@ my cs notes
 
 [course repository](https://github.com/ZonePG/Web-Dev-For-Beginners)
 
+## 区块链技术与应用
+
+[课程简介](/区块链技术与应用/01-课程简介.pdf)
+
+### 比特币
+  - [比特币：密码学原理](/区块链技术与应用/02-BTC-密码学原理.md)
+
+### 以太坊
+
 ## Tools
 
 [轻量、快速的zsh](/tools/zsh-config.md)
