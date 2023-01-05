@@ -73,7 +73,7 @@ my cs notes
 - [离散化](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/7-discretization.md)
 - [区间合并](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/8-interval-merge.md)
 
-[数据结构](/AcWing-Algorithm-Basic-Course/2-Data-Structure/5-kmp.md)
+[数据结构](/AcWing-Algorithm-Basic-Course/2-Data-Structure/)
 - [单链表](/AcWing-Algorithm-Basic-Course/2-Data-Structure/1-linkedlist.md)
 - [双链表](/AcWing-Algorithm-Basic-Course/2-Data-Structure/2-doubly-linkedlist.md)
 - [栈、单调栈](/AcWing-Algorithm-Basic-Course/2-Data-Structure/3-stack.md)
@@ -84,6 +84,10 @@ my cs notes
 - [堆](/AcWing-Algorithm-Basic-Course/2-Data-Structure/8-heap.md)
 - [哈希表](/AcWing-Algorithm-Basic-Course/2-Data-Structure/9-hashmap.md)
 - [C++ STL](/AcWing-Algorithm-Basic-Course/2-Data-Structure/10-stl.md)
+
+[搜索与图论](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/)
+- [树与图的存储](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/1-graph.md)
+- [树与图的遍历](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/2-search.md)
 
 ## Web Development for Beginners - A Curriculum
 
