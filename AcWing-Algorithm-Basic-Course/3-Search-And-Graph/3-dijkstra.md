@@ -1,5 +1,18 @@
 # Dijkstra算法
 
+## 最短路
+
+单源最短路
+- 所有边权都是正数
+  - 朴素 Dijkstra 算法 $O(n^2)$
+  - 堆优化版的 Dijkstra 算法 $O(mlogn)$
+- 存在负权边
+  - Bellman-Ford $O(nm)$
+  - SPFA 一般 $O(m)$，最坏 $O(nm)$
+
+多源汇最短路
+- Floyd 算法 $O(n^3)$
+
 ## 朴素 Dijkstra 算法
 
 时间复杂是 $O(n^2+m)$, n 表示点数，m 表示边数
