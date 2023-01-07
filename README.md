@@ -88,6 +88,7 @@ my cs notes
 [搜索与图论](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/)
 - [树与图的存储](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/1-graph.md)
 - [树与图的遍历](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/2-search.md)
+- [Dijkstra 算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/3-dijkstra.md)
 
 ## Web Development for Beginners - A Curriculum
 
