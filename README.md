@@ -91,6 +91,7 @@ my cs notes
 - [Dijkstra 算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/3-dijkstra.md)
 - [bellman-Ford 算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/4-bellman-ford.md)
 - [SPFA 算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/5-spfa.md)
+- [Floyd 算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/6-floyd.md)
 
 ## Web Development for Beginners - A Curriculum
 
