@@ -1,4 +1,4 @@
-# Dijkstra算法
+# Dijkstra 算法
 
 ## 最短路
 
