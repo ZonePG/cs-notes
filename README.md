@@ -92,6 +92,10 @@ my cs notes
 - [bellman-Ford 算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/4-bellman-ford.md)
 - [SPFA 算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/5-spfa.md)
 - [Floyd 算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/6-floyd.md)
+- [Prim 算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/7-prim.md)
+- [Kruskal 算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/8-kruskal.md)
+- [染色法判定二分图](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/9-bipartite.md)
+- [匈牙利算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/10-hungarian.md)
 
 ## Web Development for Beginners - A Curriculum
 
