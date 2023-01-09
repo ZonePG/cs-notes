@@ -97,6 +97,9 @@ my cs notes
 - [染色法判定二分图](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/9-bipartite.md)
 - [匈牙利算法](/AcWing-Algorithm-Basic-Course/3-Search-And-Graph/10-hungarian.md)
 
+[数学知识](/AcWing-Algorithm-Basic-Course/4-Mathematics/)
+- [质数](/AcWing-Algorithm-Basic-Course/4-Mathematics/1-prim-num.md)
+
 ## Web Development for Beginners - A Curriculum
 
 [course repository](https://github.com/ZonePG/Web-Dev-For-Beginners)
