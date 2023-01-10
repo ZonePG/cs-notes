@@ -99,6 +99,7 @@ my cs notes
 
 [数学知识](/AcWing-Algorithm-Basic-Course/4-Mathematics/)
 - [质数](/AcWing-Algorithm-Basic-Course/4-Mathematics/1-prim-num.md)
+- [约数](/AcWing-Algorithm-Basic-Course/4-Mathematics/2-divisor.md)
 
 ## Web Development for Beginners - A Curriculum
 
