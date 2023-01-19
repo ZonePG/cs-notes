@@ -105,6 +105,7 @@ my cs notes
 - [扩展欧几里得算法](/AcWing-Algorithm-Basic-Course/4-Mathematics/5-exgcd.md)
 - [中国剩余定理](/AcWing-Algorithm-Basic-Course/4-Mathematics/6-crt.md)
 - [高斯消元](/AcWing-Algorithm-Basic-Course/4-Mathematics/7-guass.md)
+- [求组合数](/AcWing-Algorithm-Basic-Course/4-Mathematics/8-combination-num.md)
 
 ## Web Development for Beginners - A Curriculum
 
