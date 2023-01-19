@@ -106,6 +106,8 @@ my cs notes
 - [中国剩余定理](/AcWing-Algorithm-Basic-Course/4-Mathematics/6-crt.md)
 - [高斯消元](/AcWing-Algorithm-Basic-Course/4-Mathematics/7-guass.md)
 - [求组合数](/AcWing-Algorithm-Basic-Course/4-Mathematics/8-combination-num.md)
+- [容斥原理](/AcWing-Algorithm-Basic-Course/4-Mathematics/9-exclusion.md)
+- [博弈论](/AcWing-Algorithm-Basic-Course/4-Mathematics/10-game-theory.md)
 
 ## Web Development for Beginners - A Curriculum
 

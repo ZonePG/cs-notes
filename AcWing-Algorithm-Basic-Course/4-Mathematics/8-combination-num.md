@@ -15,7 +15,7 @@ for (int i = 0; i < N; i ++ )
 ## 通过预处理逆元的方式求组合数
 
 **模板题**
-- [AcWing 885. 求组合数 I](https://www.acwing.com/problem/content/887/)
+- [AcWing 885. 求组合数 I](https://www.acwing.com/problem/content/888/)
 ```c++
 首先预处理出所有阶乘取模的余数fact[N]，以及所有阶乘取模的逆元infact[N]
 如果取模的数是质数，可以用费马小定理求逆元
