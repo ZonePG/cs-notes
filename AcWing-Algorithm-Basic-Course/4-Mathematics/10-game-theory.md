@@ -14,6 +14,7 @@ NIM博弈不存在平局，只有先手必胜和先手必败两种情况。
 
 **模板题**
 - [AcWing 891. Nim游戏](https://www.acwing.com/problem/content/893/)
+- [AcWing 892. 台阶-Nim游戏](https://www.acwing.com/problem/content/894/)
 
 ## 公平组合游戏ICG
 
@@ -62,3 +63,6 @@ SG(G) = SG(G1) ^ SG(G2) ^ … ^ SG(Gm)
 有向图游戏的某个局面必胜，当且仅当该局面对应节点的SG函数值大于0。
 
 有向图游戏的某个局面必败，当且仅当该局面对应节点的SG函数值等于0。
+
+**模板题**
+- [AcWing 894. 拆分-Nim游戏](https://www.acwing.com/problem/content/896/)
