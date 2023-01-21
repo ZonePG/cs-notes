@@ -109,6 +109,9 @@ my cs notes
 - [容斥原理](/AcWing-Algorithm-Basic-Course/4-Mathematics/9-exclusion.md)
 - [博弈论](/AcWing-Algorithm-Basic-Course/4-Mathematics/10-game-theory.md)
 
+[动态规划](/AcWing-Algorithm-Basic-Course/5-Dynamic-Planning/)
+- [背包问题](/AcWing-Algorithm-Basic-Course/5-Dynamic-Planning/1-knapsack.md)
+
 ## Web Development for Beginners - A Curriculum
 
 [course repository](https://github.com/ZonePG/Web-Dev-For-Beginners)
