@@ -111,6 +111,7 @@ my cs notes
 
 [动态规划](/AcWing-Algorithm-Basic-Course/5-Dynamic-Planning/)
 - [背包问题](/AcWing-Algorithm-Basic-Course/5-Dynamic-Planning/1-knapsack.md)
+- [DP](/AcWing-Algorithm-Basic-Course/5-Dynamic-Planning/2-dp.md)
 
 ## Web Development for Beginners - A Curriculum
 
