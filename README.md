@@ -113,6 +113,8 @@ my cs notes
 - [背包问题](/AcWing-Algorithm-Basic-Course/5-Dynamic-Planning/1-knapsack.md)
 - [DP](/AcWing-Algorithm-Basic-Course/5-Dynamic-Planning/2-dp.md)
 
+[贪心](/AcWing-Algorithm-Basic-Course/6-Greedy-Algorithm/1-greedy-algorithm.md)
+
 ## Web Development for Beginners - A Curriculum
 
 [course repository](https://github.com/ZonePG/Web-Dev-For-Beginners)
