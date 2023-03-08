@@ -23,6 +23,10 @@ my cs notes
 
 ## CMU 15-445 : Intro to Database Systems
 
+## PostgreSQL 源码阅读
+
+[PostgreSQL 编译安装与 VSCode 调试](/PostgreSQL/1-install-and-debug.md)
+
 ## CS 144 : Introduction to Computer Networking
 
 [Lab Checkpoint 0: networking warmup](/CS144/CS144-Lab0.md)
