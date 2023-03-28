@@ -137,3 +137,5 @@ my cs notes
 ## Tools
 
 [轻量、快速的zsh](/tools/zsh-config.md)
+
+[VSCode 远程开发不完全指南](/tools/vscode-remote.md)
