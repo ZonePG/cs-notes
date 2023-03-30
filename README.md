@@ -1,6 +1,10 @@
 # cs-notes
 my cs notes
 
+## 向量检索
+
+[向量搜索引擎](/向量检索/1-向量搜索引擎.md)
+
 ## CMU 15-213 : Introduction to Computer Systems ( CSAPP )
 
 ## CS 61A : Structure and Interpretation of Computer Programs
