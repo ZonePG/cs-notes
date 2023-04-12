@@ -1,6 +1,12 @@
 # cs-notes
 my cs notes
 
+## Tools
+
+[轻量、快速的zsh](/tools/zsh-config.md)
+
+[VSCode 远程开发不完全指南](/tools/vscode-remote.md)
+
 ## 向量检索
 
 [向量搜索引擎](/向量检索/1-向量搜索引擎.md)
@@ -137,9 +143,3 @@ my cs notes
   - [比特币：密码学原理](/区块链技术与应用/02-BTC-密码学原理.md)
 
 ### 以太坊
-
-## Tools
-
-[轻量、快速的zsh](/tools/zsh-config.md)
-
-[VSCode 远程开发不完全指南](/tools/vscode-remote.md)
