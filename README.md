@@ -7,6 +7,10 @@ my cs notes
 
 [VSCode 远程开发不完全指南](/tools/vscode-remote.md)
 
+## LLM
+
+[基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的](./LLM/01-LLaMA-Efficient-Tuning-how-data-load.md)
+
 ## 向量检索
 
 [向量搜索引擎](/向量检索/1-向量搜索引擎.md)
