@@ -30,7 +30,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_sft.py \
     --fp16
 ```
 
-为了理解 LLaMA-Efficient-Tuning 微调大模型的代码思路，以及如何构造自己的数据集，可以对该仓库使用 vscode 调试工具来调试该仓库代码，关于如何使用 vscode 调试 python 程序，可以参考我写的这篇博客 [vscode 远程开发不完全指南](../tools/vscode-remote.md#python-开发与调试) 的 python 调试部分。
+为了理解 LLaMA-Efficient-Tuning 微调大模型的代码思路，以及如何构造自己的数据集，可以对该仓库使用 vscode 调试工具来调试该仓库代码，关于如何使用 vscode 调试 python 程序，可以参考我写的这篇文章 [vscode 远程开发不完全指南](../tools/vscode-remote.md#python-开发与调试) 的 python 调试部分。
 
 ## 准备工作
 
@@ -71,7 +71,7 @@ git clone https://huggingface.co/baichuan-inc/baichuan-7B
             "console": "integratedTerminal",
             "justMyCode": false, // 可以调试库代码
             "args": [
-                "--model_name_or_path=/home/zonepg/models/baichuan-7B", // 更改为模型下载陆军
+                "--model_name_or_path=/home/zonepg/models/baichuan-7B", // 更改为模型下载路径
                 "--do_train",
                 "--dataset=example", // 以 example 数据集为例
                 "--finetuning_type=lora",
@@ -264,6 +264,7 @@ def preprocess_data(
 
 ## 微调自定义数据集
 
+用于微调的自定义数据集的格式可以是这样的：
 - **prompt**: 也就是指令 instruction
 - **query**: 输入 input，可能为空
 - **response**: 也是 output
