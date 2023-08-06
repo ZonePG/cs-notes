@@ -13,6 +13,8 @@ my cs notes
 
 [2023/2022 AI City Challenge MTMCT 赛道调研](/Autonomous-Driving/02-aicity.md)
 
+[2022 Track1: Multi-Camera Vehicle Tracking System for AI City Challenge 2022 (京东方亚军队伍)](/Autonomous-Driving/03-2022track1-BOE-team.md)
+
 ## LLM
 
 [基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的](./LLM/01-LLaMA-Efficient-Tuning-how-data-load.md)
