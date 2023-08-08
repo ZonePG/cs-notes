@@ -15,6 +15,8 @@ my cs notes
 
 [2022 Track1: Multi-Camera Vehicle Tracking System for AI City Challenge 2022 (京东方亚军队伍)](/Autonomous-Driving/03-2022track1-BOE-team.md)
 
+[2023 Track1: Enhancing Multi-Camera People Tracking with Anchor-Guided Clustering and Spatio-Temporal Consistency ID Re-Assignment (华盛顿大学冠军队伍)](/Autonomous-Driving/04-2023aicity-track1-UW-team.md)
+
 ## LLM
 
 [基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的](./LLM/01-LLaMA-Efficient-Tuning-how-data-load.md)
