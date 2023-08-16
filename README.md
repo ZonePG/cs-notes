@@ -17,6 +17,8 @@ my cs notes
 
 [2023 Track1: Enhancing Multi-Camera People Tracking with Anchor-Guided Clustering and Spatio-Temporal Consistency ID Re-Assignment (华盛顿大学冠军队伍)](/Autonomous-Driving/04-2023aicity-track1-UW-team.md)
 
+[MOT 算法分类介绍](/Autonomous-Driving/05-mot.md)
+
 ## LLM
 
 [基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的](./LLM/01-LLaMA-Efficient-Tuning-how-data-load.md)
