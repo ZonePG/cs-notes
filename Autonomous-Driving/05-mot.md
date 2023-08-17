@@ -1,3 +1,5 @@
+[toc]
+
 # MOT 算法分类介绍 (Tracking by Detection)
 
 ![MOT Pipeline](./images/05-01.png)
@@ -221,6 +223,8 @@ $$
 
 ## BoT-SORT: Robust Associations Multi-Pedestrian Tracking
 
+参考资料：https://aijishu.com/a/1060000000336999
+
 **改进运动特征**，改进卡尔曼滤波
 
 **优化特征表示**，改进特征组合方式或关联矩阵
@@ -247,3 +251,16 @@ code: https://github.com/NirAharon/BOT-SORT
 
 ![BoT-SORT Pipeline](./images/05-08.png)
 
+#### 卡尔曼滤波
+
+直接估计边界框的高度和宽度，而不是纵横比和高度
+
+![BoT-SORT KF](./images/05-09.png)
+
+#### 相机运动补偿（CMC）
+
+Tracking-by-detection 跟踪器严重依赖于预测轨迹的边界框和检测到的边界框之间的重叠。在动态相机情况下，图像平面中的边界框位置可能会发生显著变化，这可能会导致 ID 切换或 FN 增加。
+
+通过提取两帧之间关键点建立仿射矩阵，将卡尔曼滤波预测结果映射到新坐标下
+
+![BoT-SORT CMC](./images/05-10.png)
