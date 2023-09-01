@@ -7,6 +7,10 @@ my cs notes
 
 [VSCode 远程开发不完全指南](/tools/vscode-remote.md)
 
+## Facial Expression Recognition
+
+[[Nature Machine Intelligence 2021] Estimation of continuous valence and arousal levels from faces in naturalistic conditions](./Facial-Expression-Recognition/01-Nature-Machine-Intelligence-2021.md)
+
 ## Autonomous Driving
 
 [不确定性决策与感知跟踪任务调研](/Autonomous-Driving/01-uncertain-and-tracking.md)
