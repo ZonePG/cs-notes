@@ -11,6 +11,8 @@ my cs notes
 
 [[Nature Machine Intelligence 2021] Estimation of continuous valence and arousal levels from faces in naturalistic conditions](./Facial-Expression-Recognition/01-Nature-Machine-Intelligence-2021.md)
 
+[[BMVC 2023] Prompting Visual-Language Models for Dynamic Facial Expression Recognition](./Facial-Expression-Recognition/02-BMVC2023-DFER-CLIP.md)
+
 ## Autonomous Driving
 
 [不确定性决策与感知跟踪任务调研](/Autonomous-Driving/01-uncertain-and-tracking.md)
