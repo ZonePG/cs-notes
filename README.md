@@ -13,6 +13,10 @@ my cs notes
 
 [[BMVC 2023] Prompting Visual-Language Models for Dynamic Facial Expression Recognition](./Facial-Expression-Recognition/02-BMVC2023-DFER-CLIP.md)
 
+## DeepFake
+
+[[ECCV 2020] Thinking in Frequency: Face Forgery Detection by Mining Frequency-aware Clues](./DeepFake/01-ECCV2020-Thinking-in-Frequency.md)
+
 ## Autonomous Driving
 
 [不确定性决策与感知跟踪任务调研](/Autonomous-Driving/01-uncertain-and-tracking.md)
