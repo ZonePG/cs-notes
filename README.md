@@ -13,6 +13,8 @@ my cs notes
 
 [[BMVC 2023] Prompting Visual-Language Models for Dynamic Facial Expression Recognition](./Facial-Expression-Recognition/02-BMVC2023-DFER-CLIP.md)
 
+[[AAAI 2023] Intensity-Aware Loss for Dynamic Facial Expression Recognition in the Wild](./Facial-Expression-Recognition/03-AAAI2023-IAL.md)
+
 ## DeepFake
 
 [[ECCV 2020] Thinking in Frequency: Face Forgery Detection by Mining Frequency-aware Clues](./DeepFake/01-ECCV2020-Thinking-in-Frequency.md)
