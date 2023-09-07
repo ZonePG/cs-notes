@@ -9,11 +9,15 @@ my cs notes
 
 ## Facial Expression Recognition
 
-[[Nature Machine Intelligence 2021] Estimation of continuous valence and arousal levels from faces in naturalistic conditions](./Facial-Expression-Recognition/01-Nature-Machine-Intelligence-2021.md)
-
 [[BMVC 2023] Prompting Visual-Language Models for Dynamic Facial Expression Recognition](./Facial-Expression-Recognition/02-BMVC2023-DFER-CLIP.md)
 
 [[AAAI 2023] Intensity-Aware Loss for Dynamic Facial Expression Recognition in the Wild](./Facial-Expression-Recognition/03-AAAI2023-IAL.md)
+
+[[Nature Machine Intelligence 2021] Estimation of continuous valence and arousal levels from faces in naturalistic conditions](./Facial-Expression-Recognition/01-Nature-Machine-Intelligence-2021.md)
+
+## Diffusion Models
+
+[[MICCAI 2023] DiffMIC: Dual-Guidance Diffusion Network for Medical Image Classification](./Diffusion/01-MICCAI2023-DiffMIC.md)
 
 ## DeepFake
 
