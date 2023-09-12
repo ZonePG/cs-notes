@@ -19,6 +19,8 @@ my cs notes
 
 [[MICCAI 2023] DiffMIC: Dual-Guidance Diffusion Network for Medical Image Classification](./Diffusion/01-MICCAI2023-DiffMIC.md)
 
+[[NIPS 2022] CARD: Classification and Regression Diffusion Models](./Diffusion/02-NIPS2022-CARD.md)
+
 ## DeepFake
 
 [[ECCV 2020] Thinking in Frequency: Face Forgery Detection by Mining Frequency-aware Clues](./DeepFake/01-ECCV2020-Thinking-in-Frequency.md)
