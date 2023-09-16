@@ -13,6 +13,8 @@ my cs notes
 
 [[AAAI 2023] Intensity-Aware Loss for Dynamic Facial Expression Recognition in the Wild](./Facial-Expression-Recognition/03-AAAI2023-IAL.md)
 
+[[ACM MM 2023] Efficient Masked Autoencoder for Self-supervised Dynamic Facial Expression Recognition](./Facial-Expression-Recognition/04-ACMMM2023-MAE-DFER.md)
+
 [[Nature Machine Intelligence 2021] Estimation of continuous valence and arousal levels from faces in naturalistic conditions](./Facial-Expression-Recognition/01-Nature-Machine-Intelligence-2021.md)
 
 ## Diffusion Models
