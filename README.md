@@ -43,6 +43,10 @@ my cs notes
 
 [基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的](./LLM/01-LLaMA-Efficient-Tuning-how-data-load.md)
 
+## Bert
+
+[Bert 模型架构](./Bert/01-Bert-Architecture.ipynb)
+
 ## 向量检索
 
 [向量搜索引擎](/向量检索/1-向量搜索引擎.md)
