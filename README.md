@@ -7,6 +7,18 @@ my cs notes
 
 [VSCode 远程开发不完全指南](/tools/vscode-remote.md)
 
+## LLM
+
+[基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的](./LLM/01-LLaMA-Efficient-Tuning-how-data-load.md)
+
+## Bert
+
+[Bert 模型架构](./Bert/01-Bert-Architecture.ipynb)
+
+## 向量检索
+
+[向量搜索引擎](/向量检索/1-向量搜索引擎.md)
+
 ## Facial Expression Recognition
 
 [[BMVC 2023] Prompting Visual-Language Models for Dynamic Facial Expression Recognition](./Facial-Expression-Recognition/02-BMVC2023-DFER-CLIP.md)
@@ -38,18 +50,6 @@ my cs notes
 [2023 Track1: Enhancing Multi-Camera People Tracking with Anchor-Guided Clustering and Spatio-Temporal Consistency ID Re-Assignment (华盛顿大学冠军队伍)](/Autonomous-Driving/04-2023aicity-track1-UW-team.md)
 
 [MOT 算法分类介绍](/Autonomous-Driving/05-mot.md)
-
-## LLM
-
-[基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的](./LLM/01-LLaMA-Efficient-Tuning-how-data-load.md)
-
-## Bert
-
-[Bert 模型架构](./Bert/01-Bert-Architecture.ipynb)
-
-## 向量检索
-
-[向量搜索引擎](/向量检索/1-向量搜索引擎.md)
 
 ## CMU 15-213 : Introduction to Computer Systems ( CSAPP )
 
