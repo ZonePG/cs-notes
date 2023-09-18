@@ -19,6 +19,8 @@ my cs notes
 
 [如何处理海量单词](./Bert/03-subword-tokenizer.ipynb)
 
+[BertModel output](./Bert/04-Bert-output.ipynb)
+
 ## 向量检索
 
 [向量搜索引擎](/向量检索/1-向量搜索引擎.md)
