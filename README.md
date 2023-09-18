@@ -15,6 +15,8 @@ my cs notes
 
 [Bert 模型架构](./Bert/01-Bert-Architecture.ipynb)
 
+[Bert Embedding](./Bert/02-Bert-Embedding.ipynb)
+
 ## 向量检索
 
 [向量搜索引擎](/向量检索/1-向量搜索引擎.md)
