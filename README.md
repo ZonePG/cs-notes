@@ -27,6 +27,8 @@ my cs notes
 
 [Bert pooler](./Bert/07-Bert-pooler-head.ipynb)
 
+[Bert For Masked LM](./Bert/08-BertForMaskedLM.ipynb)
+
 ## 向量检索
 
 [向量搜索引擎](/向量检索/1-向量搜索引擎.md)
