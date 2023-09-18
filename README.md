@@ -25,6 +25,8 @@ my cs notes
 
 [Bert 中的 add & norm 和残差连接](./Bert/06-Bert-add-norm-residual-connection.ipynb)
 
+[Bert pooler](./Bert/07-Bert-pooler-head.ipynb)
+
 ## 向量检索
 
 [向量搜索引擎](/向量检索/1-向量搜索引擎.md)
