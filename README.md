@@ -21,6 +21,8 @@ my cs notes
 
 [BertModel output](./Bert/04-Bert-output.ipynb)
 
+[BertEncoder Self Attention](./Bert/05-BertEncoder-self-attention.ipynb)
+
 ## 向量检索
 
 [向量搜索引擎](/向量检索/1-向量搜索引擎.md)
