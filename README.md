@@ -23,6 +23,8 @@ my cs notes
 
 [BertEncoder Self Attention](./Bert/05-BertEncoder-self-attention.ipynb)
 
+[Bert 中的 add & norm 和残差连接](./Bert/06-Bert-add-norm-residual-connection.ipynb)
+
 ## 向量检索
 
 [向量搜索引擎](/向量检索/1-向量搜索引擎.md)
