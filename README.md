@@ -7,9 +7,15 @@ my cs notes
 
 [VSCode 远程开发不完全指南](/tools/vscode-remote.md)
 
+## llama.cpp 源码解析
+
 ## LLM
 
 [基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的](./LLM/01-LLaMA-Efficient-Tuning-how-data-load.md)
+
+[LLM Powered Autonomous Agents](./LLM/02-Agents.md)
+
+[[2023.09.21] LongLoRA: Efficient Fine-Tuning of Long-Context Large Language Models](./LLM/03-LongLoRA.md)
 
 ## Bert
 
