@@ -7,7 +7,9 @@ my cs notes
 
 [VSCode 远程开发不完全指南](/tools/vscode-remote.md)
 
-## llama.cpp 源码解析
+## Hugging Face
+
+[HfArgumentParser](/huggingface/01-HfArgumentParser.py)
 
 ## LLM
 
