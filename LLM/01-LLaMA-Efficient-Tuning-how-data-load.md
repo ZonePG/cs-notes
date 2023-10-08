@@ -1,34 +1,29 @@
 # 基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的
 
-根据 [LLaMA-Efficient-Tuning](https://github.com/hiyouga/LLaMA-Efficient-Tuning) 仓库的描述，它支持对 baichuan, LLaMA 模型的微调，支持训练方法包括预训练(pre-training), 有监督微调（sft）和 RLHF，微调方式均为 LoRA 或者 QLoRA。该仓库作者的另外一个仓库 [ChatGLM-Efficient-Tuning](https://github.com/hiyouga/ChatGLM-Efficient-Tuning) 实现了对 ChatGLM 的微调。baichuan-7B 或 ChatGLM/ChatGLM2 是中文数据集任务下效果比较好的模型，我主要基于这两个模型的微调调研了一些代码仓库。
+根据 [LLaMA-Efficient-Tuning](https://github.com/hiyouga/LLaMA-Efficient-Tuning) 仓库的描述，它支持对 BaiChuan, LLaMA, Qwen, ChatGLM 等模型的微调，支持训练方法包括预训练(pre-training), 有监督微调（sft）和 RLHF，微调方式均为 LoRA 或者 QLoRA。BaiChuan 或 Qwen 是中文数据集任务下效果比较好的模型，我主要基于这两个模型的微调调研了一些代码仓库。
 
-LLaMA-Efficient-Tuning 作者在 baichuan-7B 仓库的这个 [issue#23](https://github.com/baichuan-inc/baichuan-7B/issues/23#issuecomment-1592658897%EF%BC%9A) 下提供 baichuan-7B 模型的 LoRA 微调命令参数，可以直接运行，即可基于 alpaca_gpt4_zh 数据集进行有监督微调。
-
-```shell
-CUDA_VISIBLE_DEVICES=0 python src/train_sft.py \
-    --model_name_or_path baichuan-7B模型文件夹路径或huggingface地址 \
+根据 LLaMA-Efficient-Tuning 作者在仓库 `README.md` 的[描述](https://github.com/hiyouga/LLaMA-Efficient-Tuning#supervised-fine-tuning)，针对 Baichuan 的 sft，我们可以使用如下 shell 命令：
+```
+CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
+    --stage sft \
+    --model_name_or_path /opt/models/Baichuan2-13B-Chat \
     --do_train \
-    --dataset alpaca_gpt4_zh \
+    --dataset example \
+    --template default \
     --finetuning_type lora \
-    --lora_rank 8 \
-    --lora_target W_pack \
-    --output_dir alpaca_baichuan \
+    --lora_target W_pack \  # 这里的 W_pack 是适用 Baichuan
+    --output_dir path_to_sft_checkpoint \
+    --overwrite_cache \
     --per_device_train_batch_size 4 \
-    --per_device_eval_batch_size 4 \
-    --gradient_accumulation_steps 8 \
+    --gradient_accumulation_steps 4 \
     --lr_scheduler_type cosine \
     --logging_steps 10 \
-    --save_steps 100 \
-    --eval_steps 100 \
+    --save_steps 1000 \
     --learning_rate 5e-5 \
-    --max_grad_norm 0.5 \
     --num_train_epochs 3.0 \
-    --dev_ratio 0.01 \
-    --evaluation_strategy steps \
-    --load_best_model_at_end \
     --plot_loss \
     --fp16
-```
+``` 
 
 为了理解 LLaMA-Efficient-Tuning 微调大模型的代码思路，以及如何构造自己的数据集，可以对该仓库使用 vscode 调试工具来调试该仓库代码，关于如何使用 vscode 调试 python 程序，可以参考我写的这篇文章 [vscode 远程开发不完全指南](../tools/vscode-remote.md#python-开发与调试) 的 python 调试部分。
 
@@ -38,7 +33,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_sft.py \
 
 如果不手动指定模型下载目录，huggingface 可能会将数据集下载到 `~/.cache` 目录。个人比较喜欢手动下载模型 checkpoint 文件，并手动管理，我手动下载的模型目录位置为 `~/models` 也就是我的 `/home/zonepg/models` 目录
 
-以 baichuan-7B 为例子，为了下载 huggingface 上的大模型文件，我们需要安装 [git-lfs](https://git-lfs.github.com/)，并设置 git lfs：
+以 baichuan2-13B 为例子，为了下载 huggingface 上的大模型文件，我们需要安装 [git-lfs](https://git-lfs.github.com/)，并设置 git lfs：
 ```
 git lfs install
 ```
@@ -46,7 +41,7 @@ git lfs install
 就可以开始下载模型了：
 ```
 mkdir ~/models && cd ~/models
-git clone https://huggingface.co/baichuan-inc/baichuan-7B
+git clone https://huggingface.co/baichuan-inc/Baichuan2-13B-Chat
 ```
 
 模型参数文件较大，下载可能比较慢，如果不确定是否在下载，可以使用 `bwm-ng` 命令 (ubuntu 系统直接 `sudo apt install bwm-ng` 安装) 查看下载网络速度，确定模型否在下载。
@@ -64,37 +59,45 @@ git clone https://huggingface.co/baichuan-inc/baichuan-7B
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: train_sft.py example",
+            "name": "Python: train_bash.py Baichuan2-13B-Chat example",
             "type": "python",
             "request": "launch",
-            "program": "src/train_sft.py",
+            "program": "src/train_bash.py",
             "console": "integratedTerminal",
-            "justMyCode": false, // 可以调试库代码
+            "justMyCode": false, // 设置为 false 可以调试源码
             "args": [
-                "--model_name_or_path=/home/zonepg/models/baichuan-7B", // 更改为模型下载路径
-                "--do_train",
-                "--dataset=example", // 以 example 数据集为例
-                "--finetuning_type=lora",
-                "--lora_rank=8",
-                "--lora_target=W_pack",
-                "--output_dir=alpaca_baichuan",
+                // model arguments
+                "--model_name_or_path=/opt/models/Baichuan2-13B-Chat",
+                "--plot_loss",
+
+                // data arguments
+                "--template=baichuan2",
+                "--dataset=example",
+                "--overwrite_cache=True",
+                
+                // training arguments
+                "--do_train=True",
+                "--output_dir=checkpoints/alpaca_gpt4_en-baichuan-13b-chat",
                 "--per_device_train_batch_size=4",
-                "--per_device_eval_batch_size=4",
-                "--gradient_accumulation_steps=8",
+                "--gradient_accumulation_steps=4",
                 "--lr_scheduler_type=cosine",
                 "--logging_steps=10",
                 "--save_steps=1000",
-                "--eval_steps=1000",
                 "--learning_rate=5e-5",
-                "--max_grad_norm=0.5",
                 "--num_train_epochs=3.0",
-                "--dev_ratio=0.01",
-                "--evaluation_strategy=steps",
-                "--load_best_model_at_end",
-                "--plot_loss",
-                "--fp16"
-            ]
-        }
+                "--fp16",
+
+                // fine-tuning arguments
+                "--finetuning_type=lora",
+                "--lora_target=W_pack",
+
+                // general arguments
+                "--stage=sft",
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "7"
+            }
+        },
     ]
 }
 ```
@@ -124,36 +127,47 @@ git clone https://huggingface.co/baichuan-inc/baichuan-7B
 
 ```example_dataset``` 文件夹包括`example_dataset.py` 和 `examples.json` 文件，`examples.json` 是数据集具体内容如下。`example_dataset.py` 文件包括了数据集的构造类，这套规则是由 huggingface 定义的，在 `raw_datasets = load_dataset(...)` 会调用该文件的类构造初始化数据集，可以断点调试查看过程。
 
-### prepare_data()
+### get_dataset()
 
-由于各个数据集格式可能不一样，在 prepare_data 方法中对数据集格式进行了统一：
+由于各个数据集格式可能不一样，在 get_dataset 方法中对数据集格式进行了统一：
 ```python
-def prepare_data(
-        model_args: ModelArguments,
-        data_args: DataTrainingArguments
-) -> Dataset:
+def get_dataset(
+    model_args: "ModelArguments",
+    data_args: "DataArguments"
+) -> Union["Dataset", "IterableDataset"]:
     ...
-        for column_name, target_name in [
-            ("prompt_column", "prompt"),
-            ("query_column", "query"),
-            ("response_column", "response"),
-            ("history_column", "history")
-        ]: # every dataset will have 4 columns same as each other
-            if getattr(dataset_attr, column_name) != target_name:
-                if getattr(dataset_attr, column_name):
-                    dataset = dataset.rename_column(getattr(dataset_attr, column_name), target_name)
-                else: # None or empty string
-                    dataset = dataset.add_column(target_name, dummy_data)
-        dataset = dataset.add_column("prefix", prefix_data)
-    ...
+        dataset = load_dataset(
+            data_path,
+            data_files=data_files,
+            split=data_args.split,
+            cache_dir=model_args.cache_dir,
+            streaming=data_args.streaming,
+            use_auth_token=True if model_args.use_auth_token else None
+        )
+
+        if max_samples is not None:
+            max_samples_temp = min(len(dataset), max_samples)
+            dataset = dataset.select(range(max_samples_temp))
+
+        for column_name in ["prompt", "query", "response", "history"]: # align datasets
+            if getattr(dataset_attr, column_name) and getattr(dataset_attr, column_name) != column_name:
+                dataset = dataset.rename_column(getattr(dataset_attr, column_name), column_name)
+
+        if dataset_attr.system_prompt: # add system prompt
+            if data_args.streaming:
+                dataset = dataset.map(lambda _: {"system": dataset_attr.system_prompt})
+            else:
+                dataset = dataset.add_column("system", [dataset_attr.system_prompt] * len(dataset))
+
+        all_datasets.append(dataset)
+        ...
 ```
 
-最终经过 prepare_data 得到的 dataset 包括 5 个 columns: ['prompt', 'query', 'response', 'history', 'prefix']
+最终经过 prepare_data 得到的 dataset 包括 4 个 columns: ['prompt', 'query', 'response', 'history']
 - **prompt**: 也就是指令 instruction
 - **query**: 输入 input，可能为空
 - **response**: 也是 output
 - history: 是一个包含多轮对话的列表，子列表长度为 2，[0] 表示 input，[1] 表示 output。某些数据集没有 history。
-- prefix: 通常由 Template 设定，也就是指令的前缀。
 ```
     "history": [
       ["你好，你能帮我解答一个问题吗？", "当然，请问有什么问题？"],
@@ -161,104 +175,108 @@ def prepare_data(
     ]
 ```
 
-### preprocess_data()
+### preprocess_dataset()
 
 经过 prepare_data 获得统一格式化的 dataset，需要经过 preprocess_data 处理，得到最终输入给模型的 dataset，也就是 input_ids 和 labels。
 
 ```python
-def preprocess_data(
-        dataset: Dataset,
-        tokenizer: PreTrainedTokenizer,
-        data_args: DataTrainingArguments,
-        training_args: Seq2SeqTrainingArguments,
-        stage: Literal["pt", "sft", "rm", "ppo"]
-) -> Dataset:
-    ...
-    # support question with a single answer or multiple answers
-    def get_dialog(examples):
+def preprocess_dataset(
+    dataset: Union["Dataset", "IterableDataset"],
+    tokenizer: "PreTrainedTokenizer",
+    data_args: "DataArguments",
+    training_args: "Seq2SeqTrainingArguments",
+    stage: Literal["pt", "sft", "rm", "ppo"]
+) -> Union["Dataset", "IterableDataset"]:
+    column_names = list(next(iter(dataset)).keys())
+    template = get_template_and_fix_tokenizer(data_args.template, tokenizer)
+
+    def construct_example(examples: Dict[str, List[Any]]) -> Generator[Any, None, None]:
         for i in range(len(examples["prompt"])):
-            if examples["prompt"][i] and examples["response"][i]:
-                query, answer = examples["prompt"][i], examples["response"][i]
-                query = query + "\n" + examples["query"][i] if examples["query"][i] else query
-                prefix = examples["prefix"][i] if examples["prefix"][i] else ""
-                dialog = prompt_template.get_dialog(query, answer, examples["history"][i], prefix)
-                yield dialog
-    ...
-    def preprocess_supervised_dataset(examples):
+            query, response = examples["prompt"][i], examples["response"][i]
+            query = query + "\n" + examples["query"][i] if "query" in examples and examples["query"][i] else query
+            history = examples["history"][i] if "history" in examples else None
+            system = examples["system"][i] if "system" in examples else None
+            yield query, response, history, system
+
+    def preprocess_supervised_dataset(examples: Dict[str, List[Any]]) -> Dict[str, Any]:
         # build inputs with format `<bos> X Y <eos>` and labels with format `<ignore> ... <ignore> Y <eos>`
-        # for input with history, we build multiple input-label pairs just like:
-        # https://github.com/lm-sys/FastChat/blob/f17c092f64840fa6354ed52789dccb2daa793d0b/fastchat/train/train.py#L112
-        model_inputs = {"input_ids": [], "labels": []}
-        for dialog in get_dialog(examples):
+        # for multiturn examples, we only mask the prompt part in each prompt-response pair.
+        model_inputs = {"input_ids": [], "attention_mask": [], "labels": []}
+
+        for query, response, history, system in construct_example(examples):
             input_ids, labels = [], []
 
-            for i in range(len(dialog) // 2):
-                source_ids = tokenizer.encode(text=dialog[2*i], add_special_tokens=False)
-                target_ids = tokenizer.encode(text=dialog[2*i+1], add_special_tokens=False)
+            for turn_idx, (source_ids, target_ids) in enumerate(template.encode_multiturn(
+                tokenizer, query, response, history, system
+            )):
+                total_len = len(source_ids) + len(target_ids)
+                max_source_len = int(data_args.cutoff_len * (len(source_ids) / total_len))
+                max_target_len = int(data_args.cutoff_len * (len(target_ids) / total_len))
 
-                if len(source_ids) > data_args.max_source_length - 1: # bos token
-                    source_ids = source_ids[:data_args.max_source_length - 1]
-                if len(target_ids) > data_args.max_target_length - 1: # eos token
-                    target_ids = target_ids[:data_args.max_target_length - 1]
+                if len(source_ids) > max_source_len:
+                    source_ids = source_ids[:max_source_len]
+                if len(target_ids) > max_target_len:
+                    target_ids = target_ids[:max_target_len]
 
-                input_ids += [tokenizer.bos_token_id] + source_ids + target_ids + [tokenizer.eos_token_id]
-                labels += [IGNORE_INDEX] * (len(source_ids) + 1) + target_ids + [tokenizer.eos_token_id]
+                if turn_idx != 0 and template.efficient_eos:
+                    source_mask = [tokenizer.eos_token_id] + [IGNORE_INDEX] * (len(source_ids) - 1)
+                else:
+                    source_mask = [IGNORE_INDEX] * len(source_ids)
 
-            if len(input_ids) > data_args.max_source_length + data_args.max_target_length:
-                input_ids = input_ids[:data_args.max_source_length + data_args.max_target_length]
-            if len(labels) > data_args.max_source_length + data_args.max_target_length:
-                labels = labels[:data_args.max_source_length + data_args.max_target_length]
+                input_ids += source_ids + target_ids
+                labels += source_mask + target_ids
+
+            if template.efficient_eos:
+                input_ids += [tokenizer.eos_token_id]
+                labels += [tokenizer.eos_token_id]
+
+            if len(input_ids) > data_args.cutoff_len:
+                input_ids = input_ids[:data_args.cutoff_len]
+                labels = labels[:data_args.cutoff_len]
 
             model_inputs["input_ids"].append(input_ids)
+            model_inputs["attention_mask"].append([1] * len(input_ids))
             model_inputs["labels"].append(labels)
+
         return model_inputs
+
+    def print_supervised_dataset_example(example):
+        print("input_ids:\n{}".format(example["input_ids"]))
+        print("inputs:\n{}".format(tokenizer.decode(example["input_ids"], skip_special_tokens=False)))
+        print("label_ids:\n{}".format(example["labels"]))
+        print("labels:\n{}".format(
+            tokenizer.decode(list(filter(lambda x: x != IGNORE_INDEX, example["labels"])), skip_special_tokens=False)
+        ))
+
     ...
+    elif stage == "sft" and not training_args.predict_with_generate:
+        dataset = dataset.filter(lambda example: example["prompt"] and example["response"])
+        preprocess_func = preprocess_packed_supervised_dataset if data_args.sft_packing else preprocess_supervised_dataset
+        print_function = print_supervised_dataset_example
+
     with training_args.main_process_first(desc="dataset map pre-processing"):
-        # preprocess_function(dataset) for debug
+        kwargs = {}
+        if not data_args.streaming:
+            kwargs = dict(
+                num_proc=data_args.preprocessing_num_workers,
+                load_from_cache_file=not data_args.overwrite_cache,
+                desc="Running tokenizer on dataset"
+            )
+
         dataset = dataset.map(
-            preprocess_function,
-            batched=True,
-            num_proc=data_args.preprocessing_num_workers,
+            preprocess_func,
+            batched=True,            
             remove_columns=column_names,
-            load_from_cache_file=not data_args.overwrite_cache,
-            desc="Running tokenizer on dataset"
+            **kwargs
         )
 
-        ...
-        elif stage == "sft":
-            print_supervised_dataset_example(dataset[0])
-
+        print_function(next(iter(dataset)))
         return dataset
 ```
 
 如上我列出了以 sft 为例时的核心调用逻辑：
 - map 会对 dataset 调用 preprocess_supervised_dataset 函数，也就是 tokenizer 过程。
-- preprocess_supervised_dataset 遍历每一个样本，get_dialog 函数会根据样本的 5 个 column 属性直构造对话序列 list。
-```
-原始 column
-  {
-    "instruction": "听起来很不错。人工智能可能在哪些方面面临挑战呢？",
-    "input": "",
-    "output": "人工智能面临的挑战包括数据隐私、安全和道德方面的问题，以及影响就业机会的自动化等问题。",
-    "history": [
-      ["你好，你能帮我解答一个问题吗？", "当然，请问有什么问题？"],
-      ["我想了解人工智能的未来发展方向，你有什么想法吗？", "人工智能在未来的发展方向可能包括更强大的机器学习算法，更先进的自然语言处理技术，以及更加智能的机器人。"]
-    ]
-  },
-=========
-构造后的对话序列 dialog
-[
-    "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions.\nHuman: 你好，你能帮我解答一个问题吗？\nAssistant: ",
-    "当然，请问有什么问题？",
-    "\nHuman: 我想了解人工智能的未来发展方向，你有什么想法吗？\nAssistant: ",
-    "人工智能在未来的发展方向可能包括更强大的机器学习算法，更先进的自然语言处理技术，以及更加智能的机器人。",
-    "\nHuman: 听起来很不错。人工智能可能在哪些方面面临挑战呢？\nAssistant: ",
-    "人工智能面临的挑战包括数据隐私、安全和道德方面的问题，以及影响就业机会的自动化等问题。",
-]
-```
-- preprocess_supervised_dataset for 循环时 调用 get_dialog 得到的上述 dialog 经过 tokenizer encode 分别得到 source_ids (问) 和 target_ids (答)
-  - 最终 input_ids 包括 source_ids 和 target_ids
-  - labels 只有 target_ids，但是长度和 input_ids一样，前面的 source_ids 部分用 IGNORE_INDEX 填充。
+- preprocess_supervised_dataset 遍历每一个样本。
 
 至此，处理后的 dataset 喂给模型的输入 input_ids 和输出 labels 就构造完成了。
 
@@ -269,12 +287,10 @@ def preprocess_data(
 - **query**: 输入 input，可能为空
 - **response**: 也是 output
 - history: 是一个包含多轮对话的列表，子列表长度为 2，[0] 表示 input，[1] 表示 output。某些数据集没有 history。
-- prefix: 通常由 Template 设定，也就是指令的前缀。
 
 因此，如果要微调自定义数据集，可以这样设计自己的数据集格式：
 ```json
   {
-    "prefix": "这是一个心理健康专家助手与一个存在心理疾病的病人的问答对话。心理专家助手给出的都是有用、无害并且有礼貌的回答。", // 可以为空
     "prompt": "我最近面临考试，感到压力很大，你可以给我一些建议吗", // 指令
     "query": "", // 可以为空
     "response": "你可以这样缓解压力......",
