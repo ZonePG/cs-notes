@@ -1,8 +1,8 @@
-# 基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的
+# 基于 LLaMA-Factory 对大模型进行 SFT： 数据是如何加载的
 
-根据 [LLaMA-Efficient-Tuning](https://github.com/hiyouga/LLaMA-Efficient-Tuning) 仓库的描述，它支持对 BaiChuan, LLaMA, Qwen, ChatGLM 等模型的微调，支持训练方法包括预训练(pre-training), 有监督微调（sft）和 RLHF，微调方式均为 LoRA 或者 QLoRA。BaiChuan 或 Qwen 是中文数据集任务下效果比较好的模型，我主要基于这两个模型的微调调研了一些代码仓库。
+根据 [hiyouga/LLaMA-Factory](https://github.com/ZonePG/LLaMA-Factory/tree/main) 仓库的描述，它支持对 BaiChuan, LLaMA, Qwen, ChatGLM 等模型的微调，支持训练方法包括预训练(pre-training), 有监督微调（sft）和 RLHF，微调方式均为 LoRA 或者 QLoRA。BaiChuan 或 Qwen 是中文数据集任务下效果比较好的模型，我主要基于这两个模型的微调调研了一些代码仓库。
 
-根据 LLaMA-Efficient-Tuning 作者在仓库 `README.md` 的[描述](https://github.com/hiyouga/LLaMA-Efficient-Tuning#supervised-fine-tuning)，针对 Baichuan 的 sft，我们可以使用如下 shell 命令：
+根据 LLaMA-Factory 作者在仓库 `README.md` 的[描述](https://github.com/hiyouga/LLaMA-Factory)，针对 Baichuan 的 sft，我们可以使用如下 shell 命令：
 ```
 CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --stage sft \
@@ -25,7 +25,7 @@ CUDA_VISIBLE_DEVICES=0 python src/train_bash.py \
     --fp16
 ``` 
 
-为了理解 LLaMA-Efficient-Tuning 微调大模型的代码思路，以及如何构造自己的数据集，可以对该仓库使用 vscode 调试工具来调试该仓库代码，关于如何使用 vscode 调试 python 程序，可以参考我写的这篇文章 [vscode 远程开发不完全指南](../tools/vscode-remote.md#python-开发与调试) 的 python 调试部分。
+为了理解 LLaMA-Factory 微调大模型的代码思路，以及如何构造自己的数据集，可以对该仓库使用 vscode 调试工具来调试该仓库代码，关于如何使用 vscode 调试 python 程序，可以参考我写的这篇文章 [vscode 远程开发不完全指南](../tools/vscode-remote.md#python-开发与调试) 的 python 调试部分。
 
 ## 准备工作
 
@@ -49,7 +49,7 @@ git clone https://huggingface.co/baichuan-inc/Baichuan2-13B-Chat
 
 ### 配置调试配置文件
 
-模型下载好后，下载 LLaMA-Efficient-Tuning 的仓库代码。根据开篇提供的命令参数样例，我们可以配置调试文件`.vscode/launch.json`，准备工作就完成了：
+模型下载好后，下载 LLaMA-Factory 的仓库代码。根据开篇提供的命令参数样例，我们可以配置调试文件`.vscode/launch.json`，准备工作就完成了：
 
 ```json
 {
