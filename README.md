@@ -7,6 +7,10 @@ my cs notes
 
 [VSCode 远程开发不完全指南](/tools/vscode-remote.md)
 
+## CUDA
+
+Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: https://github.com/cuda-mode/resource-stream
+
 ## Hugging Face
 
 [HfArgumentParser](/huggingface/01-HfArgumentParser.py)
