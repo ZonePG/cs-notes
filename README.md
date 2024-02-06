@@ -11,6 +11,8 @@ my cs notes
 
 Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: https://github.com/cuda-mode/resource-stream
 
+[FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](./cuda/01-flash-attention.md)
+
 ## Hugging Face
 
 [HfArgumentParser](/huggingface/01-HfArgumentParser.py)
