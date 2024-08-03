@@ -205,6 +205,10 @@ Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: 
 
 [时空复杂度分析](/AcWing-Algorithm-Basic-Course/7-Complexity/1-complexity.md)
 
+## 笔试
+
+[2024-08-03 米哈游秋招](/Algorithm-Exam/2024-08-03-米哈游秋招.md)
+
 ## Web Development for Beginners - A Curriculum
 
 [course repository](https://github.com/ZonePG/Web-Dev-For-Beginners)
