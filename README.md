@@ -19,7 +19,7 @@ Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: 
 
 ## LLM
 
-[基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的](./LLM/01-LLaMA-Efficient-Tuning-how-data-load.md)
+[基于 LLaMA-Efficient-Tuning 对大模型进行 SFT： 数据是如何加载的](./LLM/01-LLaMA-Factory-how-data-load.md)
 
 [LLM Powered Autonomous Agents](./LLM/02-Agents.md)
 
@@ -148,6 +148,8 @@ Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: 
 [Challenge 6: Quantification](/MML-Tutorial/7-quantification.md)
 
 ## 算法模版
+
+[手撕torch系列总结](https://zhuanlan.zhihu.com/p/643763339)
 
 [LeetCode 热题 100](/AcWing-Algorithm-Basic-Course/LeetCode%20热题%20100.md)
 
