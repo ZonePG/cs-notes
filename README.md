@@ -151,7 +151,7 @@ Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: 
 
 [手撕torch系列总结](https://zhuanlan.zhihu.com/p/643763339)
 
-[LeetCode 热题 100](/AcWing-Algorithm-Basic-Course/LeetCode%20热题%20100.md)
+[LeetCode 高频题](/AcWing-Algorithm-Basic-Course/LeetCode%20高频题.md)
 
 [基础算法](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/)
 - [排序](/AcWing-Algorithm-Basic-Course/1-Basic-Algorithm/1-sort-algorithm.md)

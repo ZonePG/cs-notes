@@ -1,4 +1,4 @@
-# LeetCode 热题 100
+# LeetCode 高频题
 
 ## 哈希
 
@@ -332,6 +332,44 @@ public:
 
 ## 普通数组
 
+[912. 排序数组](https://leetcode-cn.com/problems/sort-an-array/)
+```c++
+// 堆排序
+class Solution {
+    void down(vector<int> &nums, int u, int len) {
+        int t = u;
+        if (2 * u + 1 < len && nums[2 * u + 1] < nums[t]) {
+            t = 2 * u + 1;
+        }
+        if (2 * u + 2 < len && nums[2 * u + 2] < nums[t]) {
+            t = 2 * u + 2;
+        }
+        if (t != u) {
+            swap(nums[t], nums[u]);
+            down(nums, t, len);
+        }
+    }
+
+    void heap_sort(vector<int> &nums) {
+        int len = nums.size();
+        for (int i = len / 2 - 1; i >= 0; i--) {
+            down(nums, i, len);
+        }
+        while (len--) {
+            swap(nums[0], nums[len]);
+            down(nums, 0, len);
+        }
+        reverse(nums.begin(), nums.end());
+    }
+
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        heap_sort(nums);
+        return nums;
+    }
+};
+```
+
 [53. 最大子数组和](https://leetcode-cn.com/problems/maximum-subarray/)
 > 输入：nums = [-2,1,-3,4,-1,2,1,-5,4]  
 > 输出：6  
@@ -373,6 +411,29 @@ public:
             }
         }
         ans.push_back({left, right});
+        return ans;
+    }
+};
+```
+
+[179. 最大数](https://leetcode-cn.com/problems/largest-number/)
+> 给定一组非负整数 nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。 
+> 输入：nums = [3,30,34,5,9] 
+> 输出："9534330"
+```c++
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        sort(nums.begin(), nums.end(), [](const int &x, const int &y) {
+            return to_string(x) + to_string(y) > to_string(y) + to_string(x);
+        });
+        if (nums[0] == 0) {
+            return "0";
+        }
+        string ans;
+        for (const auto &num : nums) {
+            ans += to_string(num);
+        }
         return ans;
     }
 };
@@ -583,6 +644,277 @@ public:
 };
 ```
 
+## 字符串
+
+[8. 字符串转换整数 (atoi)](https://leetcode-cn.com/problems/string-to-integer-atoi/)
+> 请你来实现一个 myAtoi(string s) 函数，使其能将字符串转换成一个 32 位有符号整数。 
+> 函数 myAtoi(string s) 的算法如下：
+> - 空格：读入字符串并丢弃无用的前导空格（" "）
+> - 符号：检查下一个字符（假设还未到字符末尾）为 '-' 还是 '+'。如果两者都不存在，则假定结果为正。
+> - 转换：通过跳过前置零来读取该整数，直到遇到非数字字符或到达字符串的结尾。如果没有读取数字，则结果为0。
+> - 舍入：如果整数数超过 32 位有符号整数范围 [−2^31,  2^31 − 1]，需要截断这个整数，使其保持在这个范围内。具体来说，小于 −2^31 的整数应该被舍入为 −2^31 ，大于 2^31 − 1 的整数应该被舍入为 2^31 − 1。
+```c++
+class Solution {
+public:
+    int myAtoi(string s) {
+        int k = 0;
+        while (k < s.size() && s[k] == ' ') {
+            k++;
+        }
+        if (k == s.size()) {
+            return 0;
+        }
+
+        int minus = 1;
+        if (s[k] == '-') {
+            minus = -1;
+            k++;
+        } else if (s[k] == '+') {
+            k++;
+        }
+
+        long long ans = 0;
+        while (k < s.size() && s[k] >= '0' && s[k] <= '9') {
+            ans = ans * 10 + s[k] - '0';
+            k++;
+            if (ans > INT_MAX) {
+                break;
+            }
+        }
+        ans *= minus;
+        if (ans > INT_MAX) {
+            ans = INT_MAX;
+        }
+        if (ans < INT_MIN) {
+            ans = INT_MIN;
+        }
+        return ans;
+    }
+};
+```
+
+[14. 最长公共前缀](https://leetcode-cn.com/problems/longest-common-prefix/)
+```c++
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        for (int i = 0; i < strs[0].size(); i++) {
+            for (int j = 1; j < strs.size(); j++) {
+                if (i == strs[j].size() || strs[0][i] != strs[j][i]) {
+                    return strs[0].substr(0, i);
+                }
+            }
+        }
+        return strs[0];
+    }
+};
+```
+
+[151. 翻转字符串里的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
+```c++
+class Solution {
+public:
+    string reverseWords(string s) {
+        reverse(s.begin(), s.end());
+        int idx = 0;
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == ' ') {
+                continue;
+            }
+            if (idx != 0) {
+                s[idx++] = ' ';
+            }
+            int j = i;
+            while (j < s.size() && s[j] != ' ') {
+                s[idx++] = s[j++];
+            }
+            reverse(s.begin() + idx - (j - i), s.begin() + idx);
+            i = j;
+        }
+        s.erase(s.begin() + idx, s.end());
+        return s;
+    }
+};
+```
+
+[165. 比较版本号](https://leetcode-cn.com/problems/compare-version-numbers/)
+> 输入：version1 = "1.2", version2 = "1.10"
+> 输出：-1
+```c++
+class Solution {
+public:
+    int compareVersion(string version1, string version2) {
+        for (int start1 = 0, start2 = 0; start1 < version1.size() || start2 < version2.size(); ) {
+            int end1 = start1, end2 = start2;
+            while (end1 < version1.size() && version1[end1] != '.') {
+                end1++;
+            }
+            while (end2 < version2.size() && version2[end2] != '.') {
+                end2++;
+            }
+            int v1 = end1 == start1 ? 0 : stoi(version1.substr(start1, end1 - start1));
+            int v2 = end2 == start2 ? 0 : stoi(version2.substr(start2, end2 - start2));
+            if (v1 < v2) {
+                return -1;
+            }
+            if (v1 > v2) {
+                return 1;
+            }
+            start1 = end1 + 1;
+            start2 = end2 + 1;
+        }
+        return 0;
+    }
+};
+```
+
+[415. 字符串相加](https://leetcode-cn.com/problems/add-strings/)
+> 输入：num1 = "11", num2 = "123"
+> 输出："134"
+```c++
+class Solution {
+public:
+    string addStrings(string num1, string num2) {
+        string ans;
+        int i = num1.size() - 1;
+        int j = num2.size() - 1;
+        int c = 0;
+        while (i >= 0 || j >= 0 || c) {
+            if (i >= 0) {
+                c += num1[i] - '0';
+                i--;
+            }
+            if (j >= 0) {
+                c += num2[j] - '0';
+                j--;
+            }
+            ans.push_back(c % 10 + '0');
+            c /= 10;
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};
+```
+
+[43. 字符串相乘](https://leetcode-cn.com/problems/multiply-strings/)
+```c++
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        vector<int> a;
+        vector<int> b;
+        reverse(num1.begin(), num1.end());
+        reverse(num2.begin(), num2.end());
+        for (const auto &ch : num1) {
+            a.emplace_back(ch - '0');
+        }
+        for (const auto &ch : num2) {
+            b.emplace_back(ch - '0');
+        }
+
+        vector<int> c(a.size() + b.size());
+        for (int i = 0; i < a.size(); i++) {
+            for (int j = 0; j < b.size(); j++) {
+                c[i + j] += a[i] * b[j];
+            }
+        }
+        for (int i = 0, t = 0; i < c.size(); i++) {
+            t += c[i];
+            c[i] = t % 10;
+            t /= 10;
+        }
+
+        int k = c.size() - 1;
+        while (k > 0 && c[k] == 0) {
+            k--;
+        }
+
+        string ans;
+        while (k >= 0) {
+            ans += c[k] + '0';
+            k--;
+        }
+        return ans;
+    }
+};
+```
+
+[224. 基本计算器](https://leetcode-cn.com/problems/basic-calculator/)
+[227. 基本计算器 II](https://leetcode-cn.com/problems/basic-calculator-ii/)
+[772. 基本计算器 III](https://leetcode-cn.com/problems/basic-calculator-iii/)
+> 我们最终要实现的计算器功能如下：
+> 1. 输入一个字符串，可以包含+ - * /、数字、括号以及空格，你的算法返回运算结果。
+> 2. 要符合运算法则，括号的优先级最高，先乘除后加减。
+> 3. 除号是整数除法，无论正负都向 0 取整（5/2=2，-5/2=-2）。
+> 4. 可以假定输入的算式一定合法，且计算过程不会出现整型溢出，不会出现除数为 0 的意外情况。
+```c++
+class Solution {
+    int dfs(const string &s, int &i) {
+        stack<int> stk;
+        int num = 0;
+        char sign = '+';
+        for (; i < s.size(); i++) {
+            // 当前字符是空格, 如果不是字符最后的位置, 直接跳过
+            if (s[i] == ' ' && i != s.size() - 1) {
+                continue;
+            }
+            // 当前字符是数字
+            else if (isdigit(s[i])) {
+                num = 10 * num + (s[i] - '0');
+            }
+            // 当前字符是 '('
+            else if (s[i] == '(') {
+                i++;
+                num = dfs(s, i);
+                i++;
+            }
+
+            // 第一种情况, 遇到 '+' , '-' , '*' , '/', ')' 需要进行运算
+            // 第二种情况, 遇到字符串的尾部 (尾部可能是一个数字, 可能是 ')' , 也可能是' ', 所以这两种情况之间有重叠)
+            if (!isdigit(s[i]) || i == s.size() - 1) {
+                int pre;   
+                if (sign == '+') {
+                    stk.push(num);
+                } else if (sign == '-') {
+                    stk.push(-num);
+                } else if (sign == '*') {
+                    pre = stk.top();
+                    stk.pop();
+                    stk.push(pre * num);
+                } else if (sign == '/') {
+                    pre = stk.top();
+                    stk.pop();
+                    stk.push(pre / num);
+                }
+
+                // 只有递归过程才会遇到 ')', 上面运算完了需要额外进行 break
+                if (s[i] == ')') {
+                    break;
+                }
+
+                sign = s[i];
+                num = 0;
+            }
+        }
+
+        // 计算栈中所有元素的和
+        int ans = 0;
+        while (stk.size()) {
+            ans += stk.top();
+            stk.pop();
+        }
+        return ans;
+    }
+
+public:
+    int calculate(string s) {
+        int i = 0;
+        return dfs(s, i);
+    }
+};
+```
+
 ## 链表
 
 [160. 相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
@@ -630,22 +962,129 @@ public:
 };
 ```
 
+[92. 反转链表 II](https://leetcode-cn.com/problems/reverse-linked-list-ii/)
+> 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left <= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。
+```c++
+class Solution {
+public:
+    ListNode* reverseBetween(ListNode* head, int left, int right) {
+        ListNode *dummpy = new ListNode(0, head);
+        ListNode *a = head;
+        ListNode *b = head;
+        ListNode *prev = dummpy;
+        while (--left) {
+            prev = prev->next;
+            a = a->next;
+        }
+        while (--right) {
+            b = b->next;
+        }
+        ListNode *bnext = b->next;
+        b->next = nullptr;
+        reverseList(a);
+
+        prev->next = b;
+        a->next = bnext;
+        return dummpy->next;
+    }
+};
+```
+
+[83. 删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)
+> 给定一个已排序的链表的头 head ， 删除所有重复的元素，使每个元素只出现一次 。返回 已排序的链表 。
+```c++
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if (head == nullptr) {
+            return head;
+        }
+
+        ListNode *dummpy = new ListNode(0, head);
+        ListNode *prev = dummpy;
+        ListNode *node = head;
+        while (node->next) {
+            if (node->val != node->next->val) {
+                prev->next = node;
+                prev = prev->next;
+            }
+            node = node->next;
+        }
+        prev->next = node;
+        return dummpy->next;
+    }
+};
+```
+
+[82. 删除排序链表中的重复元素 II](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list-ii/)
+> 给定一个已排序的链表的头 head ， 删除原始链表中所有重复数字的节点，只留下不同的数字 。返回 已排序的链表 。
+```c++
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        if (head == nullptr) {
+            return nullptr;
+        }
+
+        ListNode *dummpy = new ListNode(0, head);
+        ListNode *prev = dummpy;
+        ListNode *node = head;
+        bool deleted = false;
+        while (node->next) {
+            if (node->val == node->next->val) {
+                deleted = true;
+            } else {
+                if (deleted) {
+                    prev->next = node->next;
+                    deleted = false;
+                } else {
+                    prev->next = node;
+                    prev = prev->next;
+                }
+            }
+            node = node->next;
+        }
+        if (deleted) {
+            prev->next = nullptr;
+        }
+        return dummpy->next;
+    }
+};
+```
+
+[129. 求根到叶子节点数字之和](https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/)
+> 计算从根节点到叶节点生成的所有数字之和。
+```c++
+class Solution {
+    int ans = 0;
+
+    void dfs(TreeNode *node, int path) {
+        if (node == nullptr) {
+            return ;
+        }
+
+        path = path * 10 + node->val;
+        if (node->left == nullptr && node->right == nullptr) {
+            ans += path;
+            return ;
+        }
+        
+        dfs(node->left, path);
+        dfs(node->right, path);
+    }
+
+public:
+    int sumNumbers(TreeNode* root) {
+        dfs(root, 0);
+        return ans;
+    }
+};
+```
+
 [234. 回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
 > 用 O(n) 时间复杂度和 O(1) 空间复杂度解决此题
 ```c++
 class Solution {
-    ListNode *reverseListNode(ListNode *head) {
-        ListNode *prev = nullptr;
-        ListNode *node = head;
-        while (node) {
-            ListNode *next = node->next;
-            node->next = prev;
-            prev = node;
-            node = next;
-        }
-        return prev;
-    }
-
 public:
     bool isPalindrome(ListNode* head) {
         int num = 0;
@@ -660,7 +1099,7 @@ public:
         while (half--) {
             a = a->next;
         }
-        a = reverseListNode(a);
+        a = reverseList(a);
         ListNode *b = head;
         while (a && b) {
             if (a->val != b->val) {
@@ -723,6 +1162,49 @@ public:
             fast = fast->next;
         }
         return slow;
+    }
+};
+```
+
+[143. 重排链表](https://leetcode-cn.com/problems/reorder-list/)
+> 给定一个单链表 L 的头节点 head ，单链表 L 表示为：
+> L0 → L1 → … → Ln-1 → Ln 
+> 请将其重新排列后变为： 
+> L0 → Ln → L1 → Ln-1 → L2 → Ln-2 → … 
+> 不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。 
+```c++
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        int n = 0;
+        for (ListNode *p = head; p; p = p->next) {
+            n++;
+        }
+
+        ListNode *ahead = head;
+        n = (n + 1) / 2;
+        ListNode *node = head;
+        while (--n) {
+            node = node->next;
+        }
+        ListNode *bhead = node->next;
+        node->next = nullptr;
+
+        bhead = reverseList(bhead);
+        ListNode *dummy = new ListNode(0);
+        ListNode *prev = dummy;
+        while (ahead && bhead) {
+            prev->next = ahead;
+            ahead = ahead->next;
+            prev = prev->next;
+
+            prev->next = bhead;
+            bhead = bhead->next;
+            prev = prev->next;
+        }
+        if (ahead) {
+            prev->next = ahead;
+        }
     }
 };
 ```
@@ -840,18 +1322,6 @@ public:
 > 输出：[3,2,1,4,5]
 ```c++
 class Solution {
-    ListNode *reverse(ListNode *head) {
-        ListNode *prev = nullptr;
-        ListNode *node = head;
-        while (node) {
-            ListNode *next = node->next;
-            node->next = prev;
-            prev = node;
-            node = next;
-        }
-        return prev;
-    }
-
     ListNode *getK(ListNode *node, int k) {
         for (int i = 0; i < k - 1 && node; i++) {
             node = node->next;
@@ -867,7 +1337,7 @@ public:
         while (tail) {
             ListNode *nextHead = tail->next;
             tail->next = nullptr;
-            reverse(head);
+            reverseList(head);
             prev->next = tail;
             head->next = nextHead;
 
@@ -1212,6 +1682,45 @@ public:
 };
 ```
 
+[103. 二叉树的锯齿形层序遍历](https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/)
+> 给定一个二叉树，返回其节点值的锯齿形层序遍历。 
+> 即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行。
+```c++
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> ans;
+        if (root == nullptr) {
+            return ans;
+        }
+        queue<TreeNode*> q;
+        q.push(root);
+        int level = 0;
+        while (q.size()) {
+            level++;
+            int sz = q.size();
+            vector<int> path;
+            while (sz--) {
+                TreeNode *front = q.front();
+                q.pop();
+                path.emplace_back(front->val);
+                if (front->left) {
+                    q.push(front->left);
+                }
+                if (front->right) {
+                    q.push(front->right);
+                }
+            }
+            if (level % 2 == 0) {
+                reverse(path.begin(), path.end());
+            }
+            ans.emplace_back(path);
+        }
+        return ans;
+    }
+};
+```
+
 [108. 将有序数组转换为二叉搜索树](https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree/)
 ```c++
 class Solution {
@@ -1229,6 +1738,38 @@ class Solution {
 public:
     TreeNode* sortedArrayToBST(vector<int>& nums) {
         return buildTree(nums, 0, nums.size() - 1);
+    }
+};
+```
+
+[110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)
+> 给定一个二叉树，判断它是否是 平衡二叉树(是指该树所有节点的左右子树的深度相差不超过 1。)
+```c++
+class Solution {
+    int depth(TreeNode *node) {
+        if (node == nullptr) {
+            return 0;
+        }
+        int left = depth(node->left);
+        int right = depth(node->right);
+        return max(left, right) + 1;
+    }
+
+    bool dfs(TreeNode *node) {
+        if (node == nullptr) {
+            return true;
+        }
+        int left = depth(node->left);
+        int right = depth(node->right);
+        if (abs(right - left) > 1) {
+            return false;
+        }
+        return dfs(node->left) && dfs(node->right);
+    }
+
+public:
+    bool isBalanced(TreeNode* root) {
+        return dfs(root);
     }
 };
 ```
@@ -1355,6 +1896,61 @@ public:
             table[inorder[i]] = i;
         }
         return build(preorder, inorder, 0, preorder.size() - 1, 0, inorder.size() - 1);
+    }
+};
+```
+
+[112. 路径总和](https://leetcode-cn.com/problems/path-sum/)
+> 给你二叉树的根节点 root 和一个表示目标和的整数 targetSum 。判断该树中是否存在 根节点到叶子节点 的路径，这条路径上所有节点值相加等于目标和 targetSum 。如果存在，返回 true ；否则，返回 false 。
+```c++
+class Solution {
+    bool dfs(TreeNode *node, const int &targetSum, int sum) {
+        if (node == nullptr) {
+            return false;
+        }
+        sum += node->val;
+        if (node->left == nullptr && node->right == nullptr) {
+            return sum == targetSum;
+        }
+        return dfs(node->left, targetSum, sum) || dfs(node->right, targetSum, sum);
+    }
+
+public:
+    bool hasPathSum(TreeNode* root, int targetSum) {
+        if (root == nullptr) {
+            return false;
+        }
+
+        return dfs(root, targetSum, 0);
+    }
+};
+```
+
+[113. 路径总和 II](https://leetcode-cn.com/problems/path-sum-ii/)
+> 给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。
+```c++
+class Solution {
+    vector<vector<int>> ans;
+    vector<int> path;
+
+    void dfs(TreeNode *node, const int &targetSum, int sum) {
+        if (node == nullptr) {
+            return ;
+        }
+        sum += node->val;
+        path.emplace_back(node->val);
+        if (node->left == nullptr && node->right == nullptr && sum == targetSum) {
+            ans.emplace_back(path);
+        }
+        dfs(node->left, targetSum, sum);
+        dfs(node->right, targetSum, sum);
+        path.pop_back();
+    }
+    
+public:
+    vector<vector<int>> pathSum(TreeNode* root, int targetSum) {
+        dfs(root, targetSum, 0);
+        return ans;
     }
 };
 ```
@@ -1486,6 +2082,33 @@ public:
 };
 ```
 
+[662. 二叉树最大宽度](https://leetcode-cn.com/problems/maximum-width-of-binary-tree/)
+```c++
+class Solution {
+    using ULL = unsigned long long;
+    unordered_map<int, ULL> levelMin;
+    ULL ans;
+
+    void dfs(TreeNode *node, ULL index, int level) {
+        if (node == nullptr) {
+            return ;
+        }
+        if (levelMin.find(level) == levelMin.end()) {
+            levelMin[level] = index;
+        }
+        ans = max(ans, index - levelMin[level] + 1);
+        dfs(node->left, index * 2, level + 1);
+        dfs(node->right, index * 2 + 1, level + 1);
+    }
+
+public:
+    int widthOfBinaryTree(TreeNode* root) {
+        dfs(root, 1, 0);
+        return ans;
+    }
+};
+```
+
 ## 图论
 
 [200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
@@ -1515,6 +2138,42 @@ public:
                 if (grid[i][j] == '1') {
                     ans++;
                     dfs(grid, i, j);
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
+[695. 岛屿的最大面积](https://leetcode-cn.com/problems/max-area-of-island/)
+```c++
+class Solution {
+    vector<int> dx{-1, 0, 1, 0};
+    vector<int> dy{0, 1, 0, -1};
+    int ans = 0;
+
+    void dfs(vector<vector<int>> &grid, int x, int y, int &cnt) {
+        grid[x][y] = 0;
+        cnt++;
+        ans = max(ans, cnt);
+        for (int i = 0; i < dx.size(); i++) {
+            int a = x + dx[i];
+            int b = y + dy[i];
+            if (a < 0 || a >= grid.size() || b < 0 || b >= grid[0].size() || !grid[a][b]) {
+                continue;
+            }
+            dfs(grid, a, b, cnt);
+        }
+    }
+
+public:
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        for (int i = 0; i < grid.size(); i++) {
+            for (int j = 0; j < grid[0].size(); j++) {
+                if (grid[i][j] == 1) {
+                    int cnt = 0;
+                    dfs(grid, i, j, cnt);
                 }
             }
         }
@@ -1973,6 +2632,40 @@ public:
 };
 ```
 
+[93. 复原 IP 地址](https://leetcode-cn.com/problems/restore-ip-addresses/)
+> 输入：s = "25525511135" 
+> 输出：["255.255.11.135","255.255.111.35"]
+```c++
+class Solution {
+    vector<string> ans;
+
+    void dfs(const string &s, int cur, int cnt, string path) {
+        if (cur == s.size() && cnt == 4) {
+            ans.emplace_back(path.substr(0, path.size() - 1));
+            return ;
+        }
+
+        if (cnt > 4) {
+            return ;
+        }
+
+        for (int len = 1; len <= 3 && cur + len <= s.size(); len++) {
+            string num = s.substr(cur, len);
+            if (stoi(num) > 255 || (num[0] == '0' && num.size() > 1)) {
+                continue;
+            }
+            dfs(s, cur + len, cnt + 1, path + num + ".");
+        }
+    }
+
+public:
+    vector<string> restoreIpAddresses(string s) {
+        dfs(s, 0, 0, "");
+        return ans;
+    }
+};
+```
+
 ## 二分查找
 
 [35. 搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/)
@@ -1994,6 +2687,29 @@ public:
             }
         }
         return target > nums[left] ? left + 1 : left;
+    }
+};
+```
+
+[69. x 的平方根](https://leetcode-cn.com/problems/sqrtx/)
+```c++
+class Solution {
+public:
+    int mySqrt(int x) {
+        if (x == 0 || x == 1) {
+            return x;
+        }
+
+        int left = 0, right = x;
+        while (left < right) {
+            int mid = (left + right) >> 1;
+            if (mid > x / mid) {
+                right = mid;   
+            } else {
+                left = mid + 1;
+            }
+        }
+        return left - 1;
     }
 };
 ```
@@ -2239,6 +2955,82 @@ public:
 };
 ```
 
+[162. 寻找峰值](https://leetcode-cn.com/problems/find-peak-element/)
+> 给你一个整数数组 nums，找到峰值元素并返回其索引。数组可能包含多个峰值，在这种情况下，返回 任何一个峰值 所在位置即可。 
+> 你可以假设 nums[-1] = nums[n] = -∞ 。
+```c++
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int left = 0, right = nums.size() - 1;
+        while (left < right) {
+            int mid = (left + right + 1) >> 1;
+            if (nums[mid] > nums[mid - 1]) {
+                left = mid;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+};
+```
+
+[232. 用栈实现队列](https://leetcode-cn.com/problems/implement-queue-using-stacks/)
+```c++
+// ["MyQueue", "push", "push", "peek", "pop", "empty"]
+// [[], [1], [2], [], [], []]
+// 输出：
+// [null, null, null, 1, 1, false]
+
+// 解释：
+// MyQueue myQueue = new MyQueue();
+// myQueue.push(1); // queue is: [1]
+// myQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)
+// myQueue.peek(); // return 1
+// myQueue.pop(); // return 1, queue is [2]
+// myQueue.empty(); // return false
+class MyQueue {
+    stack<int> in, out;
+
+public:
+    MyQueue() {
+
+    }
+
+    void in2out() {
+        while (in.size()) {
+            out.push(in.top());
+            in.pop();
+        }
+    }
+    
+    void push(int x) {
+        in.push(x);
+    }
+    
+    int pop() {
+        if (out.empty()) {
+            in2out();
+        }
+        int front = out.top();
+        out.pop();
+        return front;
+    }
+    
+    int peek() {
+        if (out.empty()) {
+            in2out();
+        }
+        return out.top();
+    }
+    
+    bool empty() {
+        return in.empty() && out.empty();
+    }
+};
+```
+
 [394. 字符串解码](https://leetcode-cn.com/problems/decode-string/)
 > 输入：s = "3[a]2[bc]"  
 > 输出："aaabcbc"
@@ -2446,9 +3238,7 @@ public:
 ## 贪心算法
 
 [121. 买卖股票的最佳时机](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)
-> 输入：[7,1,5,3,6,4]  
-> 输出：5  
-> 解释：在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。
+> 你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。
 ```c++
 class Solution {
 public:
@@ -2459,6 +3249,25 @@ public:
             minPrice = min(minPrice, prices[i]);
         }
         return ans;
+    }
+};
+```
+
+[122. 买卖股票的最佳时机 II](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)
+> 在每一天，你可以决定是否购买和/或出售股票。你在任何时候 最多 只能持有 一股 股票。你也可以先购买，然后在 同一天 出售。
+```c++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int f = 0; // 手里没股票
+        int g = -prices[0]; // 手里有股票
+        for (int i = 1; i < prices.size(); i++) {
+            int newf = max(f, g + prices[i]);
+            int newg = max(f - prices[i], g);
+            f = newf;
+            g = newg;
+        }
+        return f;
     }
 };
 ```
@@ -2923,6 +3732,30 @@ public:
 };
 ```
 
+[718. 最长重复子数组](https://leetcode-cn.com/problems/maximum-length-of-repeated-subarray/)
+```c++
+class Solution {
+public:
+    int findLength(vector<int>& nums1, vector<int>& nums2) {
+        int m = nums1.size();
+        int n = nums2.size();
+        vector<vector<int>> f(m + 1, vector<int>(n + 1));
+        int ans = 0;
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (nums1[i - 1] != nums2[j - 1]) {
+                    f[i][j] = 0;
+                } else {
+                    f[i][j] = f[i - 1][j - 1] + 1;
+                    ans = max(ans, f[i][j]);
+                }
+            }
+        }
+        return ans;
+    }
+};
+```
+
 [72. 编辑距离](https://leetcode-cn.com/problems/edit-distance/)
 > 给你两个单词 word1 和 word2， 请返回将 word1 转换成 word2 所使用的最少操作数 
 > 你可以对一个单词进行如下三种操作：
@@ -2949,6 +3782,30 @@ public:
             }
         }
         return f[m][n];
+    }
+};
+```
+
+[221. 最大正方形](https://leetcode-cn.com/problems/maximal-square/)
+> 在一个由 '0' 和 '1' 组成的二维矩阵内，找到只包含 '1' 的最大正方形，并返回其面积。
+```c++
+class Solution {
+public:
+    int maximalSquare(vector<vector<char>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+        vector<vector<int>> f(m + 1, vector<int>(n + 1));
+        int ans = 0;
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (matrix[i - 1][j - 1] == '0') {
+                    continue;
+                }
+                f[i][j] = min(f[i - 1][j], min(f[i][j - 1], f[i - 1][j - 1])) + 1;
+                ans = max(ans, f[i][j]);
+            }
+        }
+        return ans * ans;
     }
 };
 ```
@@ -3059,6 +3916,20 @@ public:
             fast = nums[fast];
         }
         return slow;
+    }
+};
+```
+
+[470. 用 Rand7() 实现 Rand10()](https://leetcode-cn.com/problems/implement-rand10-using-rand7/)
+```c++
+class Solution {
+public:
+    int rand10() {
+        int t = (rand7() - 1) * 7 + rand7();
+        if (t > 40) {
+            return rand10();
+        }
+        return t % 10 + 1;
     }
 };
 ```
