@@ -191,6 +191,41 @@ public:
 };
 ```
 
+[581. 最短无序连续子数组](https://leetcode-cn.com/problems/shortest-unsorted-continuous-subarray/)
+> 给你一个整数数组 nums ，你需要找出一个 连续子数组 ，如果对这个子数组进行升序排序，那么整个数组都会变为升序排序。
+```c++
+// 输入：nums = [2,6,4,8,10,9,15]
+// 输出：5
+// 解释：你只需要对 [6, 4, 8, 10, 9] 进行升序排序，那么整个表都会变为升序排序。
+class Solution {
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        int left = 0, right = nums.size() - 1;
+        while (left + 1 < nums.size() && nums[left] <= nums[left + 1]) {
+            left++;
+        }
+        if (left == right) {
+            return 0;
+        }
+        while (right - 1 >= 0 && nums[right - 1] <= nums[right]) {
+            right--;
+        }
+
+        for (int i = left + 1; i < nums.size(); i++) {
+            while (left >= 0 && nums[left] > nums[i]) {
+                left--;
+            }
+        }
+        for (int i = right - 1; i >= 0; i--) {
+            while (right < nums.size() && nums[right] < nums[i]) {
+                right++;
+            }
+        }
+        return right - left - 1;
+    }
+};
+```
+
 ## 滑动窗口
 
 [3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
@@ -416,6 +451,44 @@ public:
 };
 ```
 
+[253. 会议室 II](https://leetcode-cn.com/problems/meeting-rooms-ii/)
+> alias: https://www.lintcode.com/problem/919/solution/57831
+```c++
+// 输入: intervals = [(0,30),(5,10),(15,20)]
+// 输出: 2
+// 解释:
+// 需要两个会议室
+// 会议室1:(0,30)
+// 会议室2:(5,10),(15,20)
+class Solution {
+public:
+    /**
+     * @param intervals: an array of meeting time intervals
+     * @return: the minimum number of conference rooms required
+     */
+    int minMeetingRooms(vector<Interval> &intervals) {
+        // Write your code here
+        if (intervals.empty()) {
+            return 0;
+        }
+
+        priority_queue<int, vector<int>, greater<int>> q;
+        sort(intervals.begin(), intervals.end(), [](const Interval &left, const Interval &right) {
+            return left.start < right.start || (left.start == right.start && left.end < right.end);
+        });
+
+        q.push({intervals[0].end});
+        for (int i = 1; i < intervals.size(); i++) {
+            if (intervals[i].start >= q.top()) {
+                q.pop();
+            }
+            q.push(intervals[i].end);
+        }
+        return q.size();
+    }
+};
+```
+
 [179. 最大数](https://leetcode-cn.com/problems/largest-number/)
 > 给定一组非负整数 nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。 
 > 输入：nums = [3,30,34,5,9] 
@@ -493,6 +566,55 @@ public:
             }
         }
         return n + 1;
+    }
+};
+```
+
+[448. 找到所有数组中消失的数字](https://leetcode-cn.com/problems/find-all-numbers-disappeared-in-an-array/)
+```c++
+class Solution {
+public:
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        for (int i = 0; i < nums.size(); i++) {
+            while (nums[i] != nums[nums[i] - 1]) {
+                swap(nums[i], nums[nums[i] - 1]);
+            }
+        }
+        vector<int> ans;
+        for (int i = 0; i < nums.size(); i++) {
+            if (nums[i] != i + 1) {
+                ans.emplace_back(i + 1);
+            }
+        }
+        return ans;
+    }
+};
+```
+
+[406. 根据身高重建队列](https://leetcode-cn.com/problems/queue-reconstruction-by-height/)
+> 输入：people = [[7,0],[4,4],[7,1],[5,0],[6,1],[5,2]]
+> 输出：[[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]]
+```c++
+class Solution {
+public:
+    vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
+        sort(people.begin(), people.end(), [](const vector<int> &left, const vector<int> &right) {
+            return left[0] < right[0] || (left[0] == right[0] && left[1] > right[1]);
+        });
+        vector<vector<int>> ans(people.size());
+        for (const auto &person : people) {
+            int spaces = person[1] + 1;
+            for (int i = 0; i < people.size(); i++) {
+                if (ans[i].empty()) {
+                    --spaces;
+                    if (!spaces) {
+                        ans[i] = person;
+                        break;
+                    }
+                }
+            }
+        }
+        return ans;
     }
 };
 ```
@@ -616,30 +738,6 @@ public:
                 swap(matrix[i][j], matrix[i][matrix.size() - j - 1]);
             }
         }
-    }
-};
-```
-
-[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)
-> 编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：
-> - 每行的元素从左到右升序排列。
-> - 每列的元素从上到下升序排列。
-```c++
-class Solution {
-public:
-    bool searchMatrix(vector<vector<int>>& matrix, int target) {
-        int m = matrix.size(), n = matrix[0].size();
-        int i = 0, j = n - 1;
-        while (i < m && j >= 0) {
-            if (matrix[i][j] == target) {
-                return true;
-            } else if (matrix[i][j] < target) {
-                i++;
-            } else {
-                j--;
-            }
-        }
-        return false;
     }
 };
 ```
@@ -911,6 +1009,77 @@ public:
     int calculate(string s) {
         int i = 0;
         return dfs(s, i);
+    }
+};
+```
+
+[301. 删除无效的括号](https://leetcode-cn.com/problems/remove-invalid-parentheses/)
+> 给你一个由若干括号和字母组成的字符串 s ，删除最小数量的无效括号，使得输入的字符串有效。
+> 返回所有可能的结果。答案可以按 任意顺序 返回。
+```c++
+class Solution {
+    vector<string> ans;
+
+    bool isValid(const string &s) {
+        int cnt = 0;
+        for (int i = 0; i < s.size(); i++) {
+            if (s[i] == '(') {
+                cnt++;
+            } else if (s[i] == ')') {
+                cnt--;
+                if (cnt < 0) {
+                    return false;
+                }
+            }
+        }
+        return cnt == 0;
+    }
+
+    void dfs(string s, int cur, int lremove, int rremove) {
+        if (lremove == 0 && rremove == 0) {
+            if (isValid(s)) {
+                ans.emplace_back(s);
+            }
+            return ;
+        }
+        for (int i = cur; i < s.size(); i++) {
+            // 去重
+            if (i != cur && s[i] == s[i - 1]) {
+                continue;
+            }
+            // 如果剩余的字符无法满足去掉的数量要求，直接返回
+            if (lremove + rremove > s.size() - i) {
+                return ;
+            }
+            // 尝试去掉一个左括号
+            if (lremove > 0 && s[i] == '(') {
+                dfs(s.substr(0, i) + s.substr(i + 1), i, lremove - 1, rremove);
+            }
+            // 尝试去掉一个右括号
+            if (rremove > 0 && s[i] == ')') {
+                dfs(s.substr(0, i) + s.substr(i + 1), i, lremove, rremove)
+            }
+        }
+    }
+
+public:
+    vector<string> removeInvalidParentheses(string s) {
+        int lremove = 0;
+        int rremove = 0;
+
+        for (const auto &ch : s) {
+            if (ch == '(') {
+                lremove++;
+            } else if (ch == ')') {
+                if (lremove == 0) {
+                    rremove++;
+                } else {
+                    lremove--;
+                }
+            }
+        }
+        dfs(s, 0, lremove, rremove);
+        return ans;
     }
 };
 ```
@@ -2082,6 +2251,52 @@ public:
 };
 ```
 
+[538. 把二叉搜索树转换为累加树](https://leetcode-cn.com/problems/convert-bst-to-greater-tree/)
+```c++
+class Solution {
+    int sum = 0;
+
+    void dfs(TreeNode *node) {
+        if (node == nullptr) {
+            return ;
+        }
+        dfs(node->right);
+        sum += node->val;
+        node->val = sum;
+        dfs(node->left);
+    }
+
+public:
+    TreeNode* convertBST(TreeNode* root) {
+        dfs(root);
+        return root;
+    }
+};
+```
+
+[617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)
+```c++
+class Solution {
+public:
+    TreeNode* mergeTrees(TreeNode* root1, TreeNode* root2) {
+        if (root1 == nullptr) {
+            return root2;
+        }
+        if (root2 == nullptr) {
+            return root1;
+        }
+
+        root1->val += root2->val;
+        
+        TreeNode *left = mergeTrees(root1->left, root2->left);
+        TreeNode *right = mergeTrees(root1->right, root2->right);
+        root1->left = left;
+        root1->right = right;
+        return root1;
+    }
+};
+```
+
 [662. 二叉树最大宽度](https://leetcode-cn.com/problems/maximum-width-of-binary-tree/)
 ```c++
 class Solution {
@@ -2105,6 +2320,54 @@ public:
     int widthOfBinaryTree(TreeNode* root) {
         dfs(root, 1, 0);
         return ans;
+    }
+};
+```
+
+[297. 二叉树的序列化与反序列化](https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/)
+```c++
+class Codec {
+public:
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        if (root == nullptr) {
+            return "None";
+        }
+        string s;
+        s = to_string(root->val) + ",";
+        s += serialize(root->left);
+        s += "," + serialize(root->right);
+        return s;
+    }
+
+    TreeNode *deserialize_helper(vector<string> &data, int &pos) {
+        if (data[pos] == "None") {
+            pos += 1;
+            return nullptr;
+        }
+        int val = stoi(data[pos]);
+        TreeNode *node = new TreeNode(val);
+        pos += 1;
+        node->left = deserialize_helper(data, pos);
+        node->right = deserialize_helper(data, pos);
+        return node;
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        vector<string> data_vec;
+        string item = "";
+        for (auto &ch : data) {
+            if (ch == ',') {
+                data_vec.emplace_back(item);
+                item = "";
+            } else {
+                item += ch;
+            }
+        }
+        data_vec.emplace_back(item);
+        int pos = 0;
+        return deserialize_helper(data_vec, pos);
     }
 };
 ```
@@ -2338,6 +2601,57 @@ public:
             node = node->son[index];
         }
         return true;
+    }
+};
+```
+
+[399. 除法求值](https://leetcode-cn.com/problems/evaluate-division/)
+```c++
+// 输入：equations = [["a","b"],["b","c"]], values = [2.0,3.0], queries = [["a","c"],["b","a"],["a","e"],["a","a"],["x","x"]]
+// 输出：[6.00000,0.50000,-1.00000,1.00000,-1.00000]
+// 解释：
+// 条件：a / b = 2.0, b / c = 3.0
+// 问题：a / c = ?, b / a = ?, a / e = ?, a / a = ?, x / x = ?
+// 结果：[6.0, 0.5, -1.0, 1.0, -1.0 ]
+// 注意：x 是未定义的 => -1.0
+class Solution {
+public:
+    vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
+        unordered_map<string, unordered_map<string, double>> graph;
+        for (int i = 0; i < equations.size(); i++) {
+            string a = equations[i][0];
+            string b = equations[i][1];
+            graph[a][b] = values[i];
+            graph[b][a] = 1.0 / values[i];
+        }
+
+        vector<double> ans(queries.size(), -1.0);
+        for (int i = 0; i < queries.size(); i++) {
+            string c = queries[i][0];
+            string d = queries[i][1];
+            if (!graph.count(c) || !graph.count(d)) {
+                continue;
+            }
+            queue<pair<string, double>> q;
+            unordered_map<string, bool> visited;
+            q.push({c, 1.0});
+            visited[c] = true;
+            while (!q.empty()) {
+                auto node = q.front();
+                q.pop();
+                if (node.first == d) {
+                    ans[i] = node.second;
+                    break;
+                }
+                for (const auto &next : graph[node.first]) {
+                    if (!visited[next.first]) {
+                        visited[next.first] = true;
+                        q.push({next.first, node.second * next.second});
+                    }
+                }
+            }
+        }
+        return ans;
     }
 };
 ```
@@ -2739,6 +3053,31 @@ public:
 };
 ```
 
+[240. 搜索二维矩阵 II](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)
+> 编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：
+> - 每行的元素从左到右升序排列。
+> - 每列的元素从上到下升序排列。
+```c++
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int m = matrix.size(), n = matrix[0].size();
+        int i = 0, j = n - 1;
+        while (i < m && j >= 0) {
+            if (matrix[i][j] == target) {
+                return true;
+            } else if (matrix[i][j] < target) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return false;
+    }
+};
+```
+
+
 [34. 在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
 ```c++
 class Solution {
@@ -3134,6 +3473,37 @@ public:
 };
 ```
 
+[85. 最大矩形](https://leetcode-cn.com/problems/maximal-rectangle/)
+> 给定一个仅包含 0 和 1 、大小为 rows x cols 的二维二进制矩阵，找出只包含 1 的最大矩形，并返回其面积。
+```c++
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int m = matrix.size();
+        int n = matrix[0].size();
+
+        vector<vector<int>> h(m, vector<int>(n));
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == '1') {
+                    if (i == 0) {
+                        h[i][j] = 1;
+                    } else {
+                        h[i][j] = h[i - 1][j] + 1;
+                    }
+                }
+            }
+        }
+
+        int ans = 0;
+        for (int i = 0; i < m; i++) {
+            ans = max(ans, largestRectangleArea(h[i]));
+        }
+        return ans;
+    }
+};
+```
+
 ## 堆
 
 [215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)
@@ -3272,6 +3642,29 @@ public:
 };
 ```
 
+[309. 最佳买卖股票时机含冷冻期](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
+> 卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。
+```c++
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        // 冷冻期 0
+        // 已买入 1
+        // 卖出   2
+        int n = prices.size();
+        vector<vector<int>> f(n, vector<int>(3, -INT_MAX));
+        f[0][0] = 0;
+        f[0][1] = -prices[0];
+        for (int i = 1; i < n; i++) {
+            f[i][0] = max(f[i - 1][0], f[i - 1][2]);
+            f[i][1] = max(f[i - 1][0] - prices[i], f[i - 1][1]);
+            f[i][2] = f[i - 1][1] + prices[i];
+        }
+        return max(f[n - 1][0], max(f[n - 1][1], f[n - 1][2]));
+    }
+};
+```
+
 [55. 跳跃游戏](https://leetcode-cn.com/problems/jump-game/)
 > 输入：nums = [2,3,1,1,4]  
 > 输出：true  
@@ -3360,6 +3753,25 @@ public:
 };
 ```
 
+[96. 不同的二叉搜索树](https://leetcode-cn.com/problems/unique-binary-search-trees/)
+> 给你一个整数 n ，求恰由 n 个节点组成且节点值从 1 到 n 互不相同的 二叉搜索树 有多少种？返回满足题意的二叉搜索树的种数。
+```c++
+class Solution {
+public:
+    int numTrees(int n) {
+        vector<int> f(n + 1, 0);
+        f[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int left = 0; left <= i - 1; left++) {
+                int right = i - 1 - left;
+                f[i] += f[left] * f[right];
+            }
+        }
+        return f[n];
+    }
+};
+```
+
 [118. 杨辉三角](https://leetcode-cn.com/problems/pascals-triangle/)
 ```c++
 class Solution {
@@ -3398,6 +3810,55 @@ public:
             f[i] = max(f[i - 2] + nums[i], f[i - 1]);
         }
         return f[nums.size() - 1];
+    }
+};
+```
+
+[213. 打家劫舍 II](https://leetcode-cn.com/problems/house-robber-ii/)
+> 所有的房屋都 围成一圈
+```c++
+class Solution {
+    int robRange(vector<int> &nums, int start, int end) {
+        vector<int> f(nums.size());
+        f[start] = nums[start];
+        f[start + 1] = max(nums[start], nums[start + 1]);
+        for (int i = start + 2; i <= end; i++) {
+            f[i] = max(f[i - 2] + nums[i], f[i - 1]);
+        }
+        return max(f[end - 1], f[end]);
+    }
+
+public:
+    int rob(vector<int>& nums) {
+        if (nums.size() == 1) {
+            return nums[0];
+        }
+        if (nums.size() == 2) {
+            return max(nums[0], nums[1]);
+        }
+        return max(robRange(nums, 0, nums.size() - 2), robRange(nums, 1, nums.size() - 1));
+    }
+};
+```
+
+[337. 打家劫舍 III](https://leetcode-cn.com/problems/house-robber-iii/)
+```c++
+class Solution {
+    vector<int> dfs(TreeNode *node) {
+        if (node == nullptr) {
+            return {0, 0};
+        }
+        auto left = dfs(node->left);
+        auto right = dfs(node->right);
+        int select = node->val + left[0] + right[0];
+        int noSelect = max(left[0], left[1]) + max(right[0], right[1]);
+        return {noSelect, select};
+    }
+
+public:
+    int rob(TreeNode* root) {
+        auto ans = dfs(root);
+        return max(ans[0], ans[1]);
     }
 };
 ```
@@ -3582,6 +4043,51 @@ public:
 };
 ```
 
+[494. 目标和](https://leetcode-cn.com/problems/target-sum/)
+> 给你一个非负整数数组 nums 和一个整数 target 。  
+> 向数组中的每个整数前添加 '+' 或 '-' ，然后串联起所有整数，可以构造一个 表达式  
+> 返回可以通过上述方法构造的、运算结果等于 target 的不同 表达式 的数目。 
+```c++
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int sum = 0;
+        for (const auto &num : nums) {
+            sum += num;
+        }
+        // sum - neg - neg = target
+        // 2 * neg = sum - target;
+        int neg = sum - target;
+        if (neg < 0 || neg % 2) {
+            return 0;
+        }
+        neg /= 2;
+        vector<int> f(neg + 1);
+        f[0] = 1;
+        for (const auto &num : nums) {
+            for (int j = neg; j >= num; j--) {
+                f[j] += f[j - num];
+            }
+        }
+        return f[neg];
+    }
+};
+```
+
+[338. 比特位计数](https://leetcode-cn.com/problems/counting-bits/)
+```c++
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> f(n + 1);
+        for (int i = 1; i <= n; i++) {
+            f[i] = f[i >> 1] + (i & 1);
+        }
+        return f;
+    }
+};
+```
+
 ## 多维动态规划
 
 [62. 不同路径](https://leetcode-cn.com/problems/unique-paths/)
@@ -3623,6 +4129,36 @@ public:
             }
         }
         return f[m - 1][n - 1];
+    }
+};
+```
+
+[647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/)
+> 给你一个字符串 s ，请你统计并返回这个字符串中 回文子串 的数目。
+```c++
+class Solution {
+public:
+    int countSubstrings(string s) {
+        vector<vector<int>> f(s.size(), vector<int>(s.size()));
+
+        int cnt = 0;
+
+        for (int j = 0; j < s.size(); j++) {
+            for (int i = 0; i <= j; i++) {
+                if (s[i] != s[j]) {
+                    continue;
+                }
+                if (i == j || i +1 == j) {
+                    f[i][j] = 1;
+                } else {
+                    f[i][j] = f[i + 1][j - 1];
+                }
+                if (f[i][j]) {
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
     }
 };
 ```
@@ -3810,7 +4346,91 @@ public:
 };
 ```
 
+[312. 戳气球](https://leetcode-cn.com/problems/burst-balloons/)
+```c++
+// 输入：nums = [3,1,5,8]
+// 输出：167
+// 解释：
+// nums = [3,1,5,8] --> [3,5,8] --> [3,8] --> [8] --> []
+// coins =  3*1*5    +   3*5*8   +  1*3*8  + 1*8*1 = 167
+class Solution {
+public:
+    int maxCoins(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> a(n + 2, 1);
+        for (int i = 1; i <= n; i++) {
+            a[i] = nums[i - 1];
+        }
+
+        vector<vector<int>> f(n + 2, vector<int>(n + 2));
+        for (int len = 3; len <= n + 2; len++) {
+            for (int i = 0; i + len - 1 < n + 2; i++) {
+                int j = i + len - 1;
+                for (int k = i + 1; k < j; k++) {
+                    f[i][j] = max(f[i][j], f[i][k] + f[k][j] + a[i] * a[k] * a[j]);
+                }
+            }
+        }
+        return f[0][n + 1];
+    }
+};
+```
+
+[10. 正则表达式匹配](https://leetcode-cn.com/problems/regular-expression-matching/)
+```c++
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int m = s.size();
+        int n = p.size();
+        s = " " + s;
+        p = " " + p;
+        vector<vector<bool>> f(m + 1, vector<bool>(n + 1));
+        
+        f[0][0] = true;
+        for (int j = 2; j <= n; j += 2) {
+            if (p[j] == '*') {
+                f[0][j] = f[0][j - 2];
+            }
+        }
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (s[i] == p[j] || p[j] == '.') {
+                    f[i][j] = f[i - 1][j - 1];
+                } else if (p[j] == '*') {
+                    if (s[i] == p[j - 1] || p[j - 1] == '.') {
+                        f[i][j] = f[i - 1][j] || f[i][j - 1] || f[i][j - 2];
+                    } else {
+                        f[i][j] = f[i][j - 2];
+                    }
+                }
+            }
+        }
+        return f[m][n];
+    }
+};
+```
+
 ## 技巧
+
+[461. 汉明距离](https://leetcode-cn.com/problems/hamming-distance/)
+> 两个整数之间的 汉明距离 指的是这两个数字对应二进制位不同的位置的数目。  
+> 给你两个整数 x 和 y，计算并返回它们之间的汉明距离。
+```c++
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int num = x ^ y;
+        int ans = 0;
+        while (num) {
+            ans += num & 1;
+            num >>= 1;
+        }
+        return ans;
+    }
+};
+```
 
 [136. 只出现一次的数字](https://leetcode-cn.com/problems/single-number/)
 > 给你一个 非空 整数数组 nums ，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。  
@@ -3930,6 +4550,35 @@ public:
             return rand10();
         }
         return t % 10 + 1;
+    }
+};
+```
+
+[621. 任务调度器](https://leetcode-cn.com/problems/task-scheduler/)
+```c++
+// 输入：tasks = ["A","A","A","B","B","B"], n = 2
+// 输出：8
+// 解释：A -> B -> (待命) -> A -> B -> (待命) -> A -> B
+//      在本示例中，两个相同类型任务之间必须间隔长度为 n = 2 的冷却时间，而执行一个任务只需要一个单位时间，所以中间出现了（待命）状态。 
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        unordered_map<char, int> table;
+        for (const auto &ch : tasks) {
+            table[ch]++;
+        }
+
+        int maxExec = 0;
+        for (const auto &item : table) {
+            maxExec = max(maxExec, item.second);
+        }
+        int maxCount = 0;
+        for (const auto &item : table) {
+            if (item.second == maxExec) {
+                maxCount++;
+            }
+        }
+        return max((maxExec - 1) * (n + 1) + maxCount, (int)tasks.size());
     }
 };
 ```
