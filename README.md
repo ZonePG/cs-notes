@@ -13,6 +13,8 @@ Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: 
 
 [FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](./cuda/01-flash-attention.md)
 
+[NVIDIA性能分析工具Nsight Systems/Compute 的使用介绍](https://www.bilibili.com/video/BV15P4y1R7VG/?share_source=copy_web&vd_source=3a620b3406963768a72a9c5ac4b2df6d)
+
 ## Hugging Face
 
 [HfArgumentParser](/huggingface/01-HfArgumentParser.py)

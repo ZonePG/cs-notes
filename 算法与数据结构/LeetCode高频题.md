@@ -4383,24 +4383,25 @@ public:
     bool isMatch(string s, string p) {
         int m = s.size();
         int n = p.size();
-        s = " " + s;
-        p = " " + p;
+        s = ' ' + s;
+        p = ' ' + p;
         vector<vector<bool>> f(m + 1, vector<bool>(n + 1));
-        
         f[0][0] = true;
         for (int j = 2; j <= n; j += 2) {
             if (p[j] == '*') {
                 f[0][j] = f[0][j - 2];
             }
         }
-
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
+                if (j + 1 <= n && p[j + 1] == '*') {
+                    continue;
+                }
                 if (s[i] == p[j] || p[j] == '.') {
                     f[i][j] = f[i - 1][j - 1];
                 } else if (p[j] == '*') {
                     if (s[i] == p[j - 1] || p[j - 1] == '.') {
-                        f[i][j] = f[i - 1][j] || f[i][j - 1] || f[i][j - 2];
+                        f[i][j] = f[i][j - 2] || f[i - 1][j];
                     } else {
                         f[i][j] = f[i][j - 2];
                     }
@@ -4481,10 +4482,10 @@ public:
         for (int left = 0, mid = 0, right = nums.size() - 1; mid <= right; ) {
             if (nums[mid] == 0) {
                 swap(nums[left++], nums[mid++]);
-            } else if (nums[mid] == 2) {
-                swap(nums[mid], nums[right--]);
-            } else {
+            } else if (nums[mid] == 1) {
                 mid++;
+            } else {
+                swap(nums[mid], nums[right--]);
             }
         }
     }
