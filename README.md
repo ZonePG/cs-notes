@@ -7,11 +7,13 @@ my cs notes
 
 [VSCode 远程开发不完全指南](/tools/vscode-remote.md)
 
-## CUDA
+## AI System
 
 Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: https://github.com/cuda-mode/resource-stream
 
-[FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](./cuda/01-flash-attention.md)
+[[Attention优化][2w字]🔥原理&图解: 从Online-Softmax到FlashAttention V1/V2/V3](https://zhuanlan.zhihu.com/p/668888063)
+
+[彻底搞懂！CUDA编程之：如何安装Nsight system及compute](https://www.bilibili.com/video/BV1UP411s7nE/?share_source=copy_web&vd_source=3a620b3406963768a72a9c5ac4b2df6d)
 
 [NVIDIA性能分析工具Nsight Systems/Compute 的使用介绍](https://www.bilibili.com/video/BV15P4y1R7VG/?share_source=copy_web&vd_source=3a620b3406963768a72a9c5ac4b2df6d)
 
