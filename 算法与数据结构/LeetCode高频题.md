@@ -2372,6 +2372,67 @@ public:
 };
 ```
 
+[3249. 统计好节点的数目](https://leetcode.cn/problems/count-the-number-of-good-nodes/)
+> 如果一个节点的所有子节点为根的子树包含的节点数相同，则认为该节点是一个好节点。  
+> 输入：edges = [[0,1],[0,2],[1,3],[1,4],[2,5],[2,6]]  
+> 输出：7
+```c++
+class Solution {
+    int ans = 0;
+    vector<vector<int>> graph;
+
+    int dfs(int cur, int prev) {
+        int son_size = 0;
+        for (const auto &son : graph[cur]) {
+            if (son != prev) {
+                son_size++;
+            }
+        }
+        if (son_size == 0) {
+            ans++;
+            return 1;
+        }
+
+        int son_sum = 0;
+        int sum = 0;
+        bool check = true;
+        for (const auto &son : graph[cur]) {
+            if (son == prev) {
+                continue;
+            }
+            int new_son_sum = dfs(son, cur);
+            if (son_sum == 0) {
+                son_sum = new_son_sum;
+            }
+            if (son_sum != new_son_sum) {
+                check = false;
+            }
+            sum += new_son_sum;
+        }
+        sum++;
+
+        if (check) {
+            ans++;
+        }
+        return sum;
+    }
+
+public:
+    int countGoodNodes(vector<vector<int>>& edges) {
+        int n = edges.size() + 1;
+        graph.resize(n);
+        for (const auto &e : edges) {
+            int a = e[0], b = e[1];
+            graph[a].push_back(b);
+            graph[b].push_back(a);
+        }
+
+        dfs(0, -1);
+        return ans;
+    }
+};
+```
+
 ## 图论
 
 [200. 岛屿数量](https://leetcode-cn.com/problems/number-of-islands/)
