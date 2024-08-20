@@ -13,7 +13,7 @@ Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: 
 
 [CUDA 编程基础](/AI-System/01-CUDA-Basics.md)
 
-[手撕 CUAD 算子](/AI-System/cuda_op)
+[手撕 CUDA 算子](/AI-System/02-CUDA-op.md)
 
 [高性能计算与 AI infra](https://www.zhihu.com/column/c_1681252213014466560)
 
