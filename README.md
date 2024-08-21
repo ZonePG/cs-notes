@@ -15,6 +15,8 @@ Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: 
 
 [手撕 CUDA 算子](/AI-System/02-CUDA-op.md)
 
+[手撕 torch 算子](/AI-System/03-torch-op.md)
+
 [高性能计算与 AI infra](https://www.zhihu.com/column/c_1681252213014466560)
 
 [[Attention优化][2w字]🔥原理&图解: 从Online-Softmax到FlashAttention V1/V2/V3](https://zhuanlan.zhihu.com/p/668888063)
@@ -157,8 +159,6 @@ Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: 
 
 [CS 61B : Data Structures](https://github.com/ZonePG/CS61B)
 
-[手撕torch系列总结](https://zhuanlan.zhihu.com/p/643763339)
-
 [LeetCode 高频题](/算法与数据结构/LeetCode高频题.md)
 
 [AcWing 算法模版](/算法与数据结构/AcWing算法模版.md)
@@ -168,12 +168,3 @@ Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: 
 ## Web Development for Beginners - A Curriculum
 
 [course repository](https://github.com/ZonePG/Web-Dev-For-Beginners)
-
-## 区块链技术与应用
-
-[课程简介](/区块链技术与应用/01-课程简介.pdf)
-
-### 比特币
-  - [比特币：密码学原理](/区块链技术与应用/02-BTC-密码学原理.md)
-
-### 以太坊
