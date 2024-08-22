@@ -44,6 +44,14 @@ CUDA (Compute Unified Device Architecture) 是支持 GPU 通用计算的平台�
 - SM 对应线程块 block。块内的线程通过共享内存、原子操作和屏障同步进行协作 (shared memory, atomic operations and barrier synchronization)。不同块中的线程不能协作。
 - 设备端（device）对应线程块组合体 grid
 
+如何确定 grid size 和 block size 呢
+- block size
+  - 首先 block size 范围是 1-1024。
+  - 考虑 occupancy 占用，最大线程数量 / 最大 block 数量的倍数 (64, 96)。最大活跃线程数的约数，所以可以选择 128, 256, 512。
+  - 考虑 register 数量，不能占用太多 register，所以可以选择 128，256
+- grid size
+  - element wise 程序通常 grid size 是 block size 的整数倍，这样可以保证所有的 block 都能被充分利用。
+
 ## PyTorch自定义CUDA算子
 
 Torch 使用CUDA 算子 主要分为三个步骤：
