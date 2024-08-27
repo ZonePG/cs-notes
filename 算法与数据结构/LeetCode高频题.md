@@ -3070,6 +3070,7 @@ public:
 ```c++
 class Solution {
 public:
+    // 二分查找
     int mySqrt(int x) {
         if (x == 0 || x == 1) {
             return x;
@@ -3085,6 +3086,22 @@ public:
             }
         }
         return left - 1;
+    }
+    // 牛顿迭代法
+    int mySqrt(int x) {
+        if (x == 0) {
+            return 0;
+        }
+
+        double C = x, x0 = x;
+        while (true) {
+            double xi = 0.5 * (x0 + C / x0);
+            if (fabs(x0 - xi) < 1e-7) {
+                break;
+            }
+            x0 = xi;
+        }
+        return int(x0);
     }
 };
 ```
@@ -4083,7 +4100,7 @@ public:
 > 输入：s = ")()())"  
 > 输出：4  
 > 解释：最长有效括号子串是 "()()"
-```
+```c++
 class Solution {
 public:
     int longestValidParentheses(string s) {
@@ -4643,4 +4660,85 @@ public:
         return max((maxExec - 1) * (n + 1) + maxCount, (int)tasks.size());
     }
 };
+```
+
+找出系统中内存占用最大的时刻，此时的内存占用是多少，此时系统中都有哪些内存的 id
+```c++
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <set>
+
+using namespace std;
+
+struct memRequest {
+    int id;    // 请求 ID
+    int mem;   // 请求的内存大小
+    int start; // 开始时间
+    int end;   // 结束时间
+};
+
+struct Event {
+    int time;
+    int memChange; // 内存变化量
+    int id;
+
+    // 自定义排序规则：先按时间排序；如果时间相同，start事件在前，end事件在后
+    bool operator<(const Event &other) const {
+        return time < other.time || (time == other.time && memChange > other.memChange);
+    }
+};
+
+int main() {
+    vector<memRequest> requests = {
+        {1, 10, 0, 5},
+        {2, 15, 2, 7},
+        {3, 20, 3, 8},
+        {4, 25, 6, 10},
+        {5, 30, 8, 12},
+    };
+
+    vector<Event> events;
+
+    // 创建事件列表
+    for (const auto &req : requests) {
+        events.push_back({req.start, req.mem, req.id});
+        events.push_back({req.end, -req.mem, req.id});
+    }
+
+    // 按时间排序事件
+    sort(events.begin(), events.end());
+
+    int maxMemory = 0;
+    int currentMemory = 0;
+    set<int> currentIDs;
+    set<int> maxMemoryIDs;
+
+    // 扫描线算法，遍历所有事件
+    for (const auto &event : events) {
+        currentMemory += event.memChange;
+
+        if (event.memChange > 0) {
+            currentIDs.insert(event.id);
+        } else {
+            currentIDs.erase(event.id);
+        }
+
+        // 更新最大内存使用量和对应的 ID 列表
+        if (currentMemory > maxMemory) {
+            maxMemory = currentMemory;
+            maxMemoryIDs = currentIDs;
+        }
+    }
+
+    // 输出结果
+    std::cout << "Maximum Memory Usage: " << maxMemory << std::endl;
+    std::cout << "Requests at that time: ";
+    for (int id : maxMemoryIDs) {
+        std::cout << id << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
 ```
