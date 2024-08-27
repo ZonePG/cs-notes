@@ -44,13 +44,6 @@ CUDA (Compute Unified Device Architecture) 是支持 GPU 通用计算的平台�
 - SM 对应线程块 block。块内的线程通过共享内存、原子操作和屏障同步进行协作 (shared memory, atomic operations and barrier synchronization)。不同块中的线程不能协作。
 - 设备端（device）对应线程块组合体 grid
 
-如何确定 grid size 和 block size 呢
-- block size
-  - 首先 block size 范围是 1-1024。
-  - 考虑 occupancy 占用，最大线程数量 / 最大 block 数量的倍数 (64, 96)。最大活跃线程数的约数，所以可以选择 128, 256, 512。
-  - 考虑 register 数量，不能占用太多 register，所以可以选择 128，256
-- grid size
-  - element wise 程序通常 grid size 是 block size 的整数倍，这样可以保证所有的 block 都能被充分利用。
 
 ## PyTorch自定义CUDA算子
 
@@ -64,3 +57,20 @@ Torch 使用CUDA 算子 主要分为三个步骤：
 - SETUP 编译调用。`from torch.utils.cpp_extension import BuildExtension, CUDAExtension`。
 - CMAKE 编译调用。编译生成 .so 文件，`torch.ops.load_library("build/libxxx.so")`，`torch.ops.xxx.torch_launch_xxx()` 调用。
 
+## 面试题
+
+如何确定 grid size 和 block size
+- block size
+  - 首先 block size 范围是 1-1024。
+  - 考虑 occupancy 占用，最大线程数量 / 最大 block 数量的倍数 (64, 96)。最大活跃线程数的约数，所以可以选择 128, 256, 512。
+  - 考虑 register 数量，不能占用太多 register，所以可以选择 128，256
+- grid size
+  - element wise 程序通常 grid size 是 block size 的整数倍，这样可以保证所有的 block 都能被充分利用。
+
+如何算 SM 利用率与 GPU 利用率
+- SM 利用率 occupancy = 有效的线程数 / 最大线程数
+- GPU 利用率 utilization = 有效的 SM 数 / 总的 SM 数
+
+如何理解 CUDA stream
+- 不同stream之间的计算是异步的
+- cuda Stream 是一个任务的队列，你可以往里面丢kernel，内存操作，可以通过stream来查看，同步这些操作。stream内部是顺序执行，不同stream之间可以并行
