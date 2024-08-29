@@ -74,3 +74,18 @@ Torch 使用CUDA 算子 主要分为三个步骤：
 如何理解 CUDA stream
 - 不同stream之间的计算是异步的
 - cuda Stream 是一个任务的队列，你可以往里面丢kernel，内存操作，可以通过stream来查看，同步这些操作。stream内部是顺序执行，不同stream之间可以并行
+
+CUDA 的 block, grid, thread 的关系？
+- thread: 线程是 CUDA 程序中最基本的执行单元。每个线程都有一个唯一的线程 ID，可以通过 threadIdx.x、threadIdx.y 和 threadIdx.z 来访问。
+  - 线程是由 CUDA 核函数（kernel）中的代码并行执行的。
+- block: 块是线程的集合，每个块都有一个唯一的块 ID，可以通过 blockIdx.x、blockIdx.y 和 blockIdx.z 来访问。
+  - 线程块中的所有线程可以通过共享内存（shared memory）进行通信。
+- grid: 网格是块的集合，gridDim.x、gridDim.y 和 gridDim.z 分别表示网格包含的块的数量。
+- threadIdx 表示线程在其所在块内的索引；blockIdx 表示线程块在网格内的索引；blockDim 表示每个块中线程的数量；gridDim 表示网格中块的数量。
+- 32 个 thread 组成一个 warp，warp 是最小的调度单元，硬件会一次性把一个 warp 放在就绪的 SM 中执行。
+- 多个 thread 组成一个 block，block 更像是一个软件上的概念，一个 block 的多个 thread 是可以通过共享内存进行通信的。
+
+CUDA 的共享内存是什么？如何理解内存墙？
+- CUDA 的共享内存（Shared Memory）具有比全局内存更低的访问延迟和更高的带宽。共享内存是所有线程块（Block）中的线程所共享的，而不是整个 GPU 的所有线程。
+- 内存墙（Memory Wall）是指处理器和内存之间速度的不匹配问题。随着处理器速度的快速增加，内存访问速度的增长却相对较慢，这导致了一个瓶颈，即内存墙。在 CUDA 编程中，内存墙通常指的是全局内存的高延迟和低带宽可能阻碍 GPU 性能的问题。为了减轻这种影响，可以通常利用共享内存来减少对全局内存的依赖。通过将频繁访问的数据缓存到共享内存中，可以减少全局内存访问的次数，从而提高性能。
+

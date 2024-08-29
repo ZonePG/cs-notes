@@ -3585,7 +3585,6 @@ public:
 ## 堆
 
 [215. 数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)
-> 给你一个整数数组 nums 和一个整数 k ，请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案。  
 > 输入: [3,2,1,5,6,4], k = 2  
 > 输出: 5
 ```c++
@@ -4306,14 +4305,14 @@ public:
 class Solution {
 public:
     int longestCommonSubsequence(string text1, string text2) {
-        int m = text1.size(), n = text2.size();
+        int m = text1.size();
+        int n = text2.size();
         vector<vector<int>> f(m + 1, vector<int>(n + 1));
         for (int i = 1; i <= m; i++) {
             for (int j = 1; j <= n; j++) {
                 f[i][j] = max(f[i - 1][j], f[i][j - 1]);
-                if (text1[i - 1] == text2[j - 1]) {
-                    f[i][j] = max(f[i][j], f[i - 1][j - 1] + 1);
-                }
+                int t = (text1[i - 1] == text2[j - 1]);
+                f[i][j] = max(f[i][j], f[i - 1][j - 1] + t);
             }
         }
         return f[m][n];
