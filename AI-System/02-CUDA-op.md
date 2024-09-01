@@ -170,7 +170,7 @@ __global__ void sgemm(float *a, float *b, float *c, int M, int N, int K) {
 // dim3 blockDim(BN/TN, BM/TM);
 // dim3 gridDim((N + BN - 1) / BN, (M + BM - 1) / BM)
 __global__ void sgemm_thread_tile_vec4(
-    float *__restrict__ a, float *__restrict__ b, float *__restrict__ c,
+    float *a, float *b, float *c,
     const int M, const int N, const int K) {
     // [1]  Block Tile: 一个16x16的block处理C上大小为128X128的一个目标块
     // [2] Thread Tile: 每个thread负责计算TM*TN(8*8)个元素，增加计算密度
