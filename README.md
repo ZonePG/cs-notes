@@ -165,6 +165,8 @@ Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: 
 
 [2024-08-03 米哈游秋招](/算法与数据结构/2024-08-03-米哈游秋招.md)
 
+[2024-09-04 华为秋招](/算法与数据结构/2024-09-04-华为秋招.md)
+
 ## Web Development for Beginners - A Curriculum
 
 [course repository](https://github.com/ZonePG/Web-Dev-For-Beginners)
