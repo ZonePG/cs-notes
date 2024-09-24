@@ -9,21 +9,13 @@ my cs notes
 
 ## AI System
 
-Jeremy howard (fast.ai 创始人)等人收集的关于 CUDA 学习的资料库: https://github.com/cuda-mode/resource-stream
+[CUDA 编程基础](./AI-System/01-CUDA-Basics.md)
 
-[CUDA 编程基础](/AI-System/01-CUDA-Basics.md)
+[手撕 CUDA 算子](https://github.com/ZonePG/CUDA-Learn-Notes)
 
-[手撕 CUDA 算子](/AI-System/02-CUDA-op.md)
+[手撕 torch 算子](./AI-System/03-torch-op.md)
 
-[手撕 torch 算子](/AI-System/03-torch-op.md)
-
-[高性能计算与 AI infra](https://www.zhihu.com/column/c_1681252213014466560)
-
-[[Attention优化][2w字]🔥原理&图解: 从Online-Softmax到FlashAttention V1/V2/V3](https://zhuanlan.zhihu.com/p/668888063)
-
-[彻底搞懂！CUDA编程之：如何安装Nsight system及compute](https://www.bilibili.com/video/BV1UP411s7nE/?share_source=copy_web&vd_source=3a620b3406963768a72a9c5ac4b2df6d)
-
-[NVIDIA性能分析工具Nsight Systems/Compute 的使用介绍](https://www.bilibili.com/video/BV15P4y1R7VG/?share_source=copy_web&vd_source=3a620b3406963768a72a9c5ac4b2df6d)
+[AI Infra 面试题库](./AI-System/04-AI-Infra-Interview.md)
 
 ## Hugging Face
 
