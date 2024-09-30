@@ -151,13 +151,15 @@ my cs notes
 
 [CS 61B : Data Structures](https://github.com/ZonePG/CS61B)
 
-[LeetCode 高频题](/算法与数据结构/LeetCode高频题.md)
+[LeetCode 高频题](./算法与数据结构/LeetCode高频题.md)
 
-[AcWing 算法模版](/算法与数据结构/AcWing算法模版.md)
+[AcWing 算法模版](./算法与数据结构/AcWing算法模版.md)
 
-[2024-08-03 米哈游秋招](/算法与数据结构/2024-08-03-米哈游秋招.md)
+[2024-08-03 米哈游秋招](./算法与数据结构/2024-08-03-米哈游秋招.md)
 
-[2024-09-04 华为秋招](/算法与数据结构/2024-09-04-华为秋招.md)
+[2024-09-04 华为秋招](./算法与数据结构/2024-09-04-华为秋招.md)
+
+[2024-09-20 中兴秋招](./算法与数据结构/2024-09-20-中兴秋招.md)
 
 ## Web Development for Beginners - A Curriculum
 
