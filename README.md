@@ -9,8 +9,6 @@ my cs notes
 
 ## AI System
 
-[CUDA 编程基础](./AI-System/01-CUDA-Basics.md)
-
 [手撕 CUDA 算子](https://github.com/ZonePG/CUDA-Learn-Notes)
 
 [手撕 torch 算子](./AI-System/03-torch-op.md)
