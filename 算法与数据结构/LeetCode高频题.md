@@ -462,29 +462,20 @@ public:
 // 会议室2:(5,10),(15,20)
 class Solution {
 public:
-    /**
-     * @param intervals: an array of meeting time intervals
-     * @return: the minimum number of conference rooms required
-     */
-    int minMeetingRooms(vector<Interval> &intervals) {
-        // Write your code here
-        if (intervals.empty()) {
-            return 0;
+    int minMeetingRooms(vector<vector<int>>& intervals) {
+        vector<vector<int>> timeStamps;
+        for (const auto &item : intervals) {
+            timeStamps.push_back({item[0], 1});
+            timeStamps.push_back({item[1], -1});
         }
-
-        priority_queue<int, vector<int>, greater<int>> q;
-        sort(intervals.begin(), intervals.end(), [](const Interval &left, const Interval &right) {
-            return left.start < right.start || (left.start == right.start && left.end < right.end);
-        });
-
-        q.push({intervals[0].end});
-        for (int i = 1; i < intervals.size(); i++) {
-            if (intervals[i].start >= q.top()) {
-                q.pop();
-            }
-            q.push(intervals[i].end);
+        sort(timeStamps.begin(), timeStamps.end());
+        int ans = 0;
+        int cnt = 0;
+        for (const auto &elem: timeStamps) {
+            cnt += elem[1];
+            ans = max(ans, cnt);
         }
-        return q.size();
+        return ans;
     }
 };
 ```
@@ -2827,26 +2818,23 @@ class Solution {
     vector<vector<int>> ans;
     vector<int> path;
 
-    void dfs(vector<int> &candidates, int cur, int target) {
-        if (target < 0) {
+    void dfs(vector<int> &candidates, int target, int cur) {
+        if (target < 0 || cur == candidates.size()) {
             return ;
         }
         if (target == 0) {
-            ans.emplace_back(path);
-            return;
+            ans.push_back(path);
+            return ;
         }
-        if (cur == candidates.size()) {
-            return;
-        }
-        path.emplace_back(candidates[cur]);
-        dfs(candidates, cur, target - candidates[cur]);
+        path.push_back(candidates[cur]);
+        dfs(candidates, target - candidates[cur], cur);
         path.pop_back();
-        dfs(candidates, cur + 1, target);
+        dfs(candidates, target, cur + 1);
     }
 
 public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        dfs(candidates, 0, target);
+        dfs(candidates, target, 0);
         return ans;
     }
 };
@@ -3491,14 +3479,10 @@ public:
     vector<int> dailyTemperatures(vector<int>& temperatures) {
         stack<int> stk;
         vector<int> ans(temperatures.size());
-        for (int i = temperatures.size() - 1; i >= 0; i--) {
-            while (!stk.empty() && temperatures[stk.top()] <= temperatures[i]) {
+        for (int i = 0; i < temperatures.size(); i++) {
+            while (!stk.empty() && temperatures[i] > temperatures[stk.top()]) {
+                ans[stk.top()] = i - stk.top();
                 stk.pop();
-            }
-            if (stk.empty()) {
-                ans[i] = 0;
-            } else {
-                ans[i] = stk.top() - i;
             }
             stk.push(i);
         }
@@ -3784,7 +3768,7 @@ public:
 [763. 划分字母区间](https://leetcode-cn.com/problems/partition-labels/)
 > 给你一个字符串 s 。我们要把这个字符串划分为尽可能多的片段，同一字母最多出现在一个片段中。  
 > 注意，划分结果需要满足：将所有划分结果按顺序连接，得到的字符串仍然是 s 。  
-> 返回一个表示每个字符串片段的长度的列表。
+> 返回一个表示每个字符串片段的长度的列表。  
 > 输入：s = "ababcbacadefegdehijhklij"  
 > 输出：[9,7,8]  
 > 解释：划分结果为 "ababcbaca"、"defegde"、"hijhklij" 。每个字母最多出现在一个片段中。像 "ababcbacadefegde", "hijhklij" 这样的划分是错误的，因为划分的片段数较少。 
@@ -3810,6 +3794,39 @@ public:
 };
 ```
 
+[402. 移掉K位数字](https://leetcode-cn.com/problems/remove-k-digits/)
+> 给你一个以字符串表示的非负整数 num 和一个整数 k ，移除这个数中的 k 位数字，使得剩下的数字最小。请你以字符串形式返回这个最小的数字。  
+> 输入：num = "1432219", k = 3  
+> 输出："1219"
+```c++
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        k = min(k, (int)num.size());
+        string ans;
+        for (const auto &ch : num) {
+            while (k && ans.size() && ans.back() > ch) {
+                k--;
+                ans.pop_back();
+            }
+            ans += ch;
+        }
+        while (k--) {
+            ans.pop_back();
+        }
+
+        k = 0;
+        while (k < ans.size() && ans[k] == '0') {
+            k++;
+        }
+        if (k == ans.size()) {
+            ans += '0';
+        }
+        return ans.substr(k);
+    }
+};
+```
+
 ## 动态规划
 
 [70. 爬楼梯](https://leetcode-cn.com/problems/climbing-stairs/) 
@@ -3819,13 +3836,13 @@ class Solution {
 
 public:
     int climbStairs(int n) {
-        LL a = 1, b = 1;
+        LL f0 = 1, f1 = 1;
         while (n--) {
-            int c = a + b;
-            a = b;
-            b = c;
+            LL f2 = f0 + f1;
+            f0 = f1;
+            f1 = f2;
         }
-        return a;
+        return f0;
     }
 };
 ```
@@ -4657,6 +4674,32 @@ public:
             }
         }
         return max((maxExec - 1) * (n + 1) + maxCount, (int)tasks.size());
+    }
+};
+```
+
+[1996. 游戏中弱角色的数量](https://leetcode.cn/problems/the-number-of-weak-characters-in-the-game/)
+> 输入：properties = [[5,5],[6,3],[3,6]]  
+> 输出：0  
+> 解释：不存在攻击和防御都严格高于其他角色的角色。
+```c++
+class Solution {
+public:
+    int numberOfWeakCharacters(vector<vector<int>>& properties) {
+        sort(properties.begin(), properties.end(), [](const vector<int> &a, const vector<int> &b) {
+            return a[0] == b[0] ? (a[1] < b[1]) : (a[0] > b[0]);
+        });
+
+        int ans = 0;
+        int maxDef = 0;
+        for (const auto &p : properties) {
+            if (p[1] < maxDef) {
+                ans++;
+            } else {
+                maxDef = p[1];
+            }
+        }
+        return ans;
     }
 };
 ```
